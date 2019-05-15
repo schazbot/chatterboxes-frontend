@@ -2,12 +2,13 @@ import React, { Component } from "react";
 
 import "./App.css";
 import Sentence from "./containers/Sentence";
+import FolderContents from "./containers/FolderContents"
 
-const PICS_URL = "https://www.opensymbols.org/api/v1/symbols/search?q=apple";
+const PICS_URL = "http://localhost:3002/api/v1/users/1";
 
 class App extends Component {
   state = {
-    allMyPictures: [],
+    allMyFolders: [],
     selectedPictures: []
   };
 
@@ -20,7 +21,7 @@ class App extends Component {
       .then(resp => resp.json())
       .then(data =>
         this.setState({
-          allMyPictures: data
+          allMyFolders: data.folders
         })
       );
   };
@@ -28,8 +29,8 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Sentence allMyPictures={this.state.allMyPictures}/>
-        
+        <Sentence />
+        {this.state.allMyFolders.map(f => <FolderContents folder={f}/> )}
       </div>
     );
   }

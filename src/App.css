@@ -1,33 +1,51 @@
-.App {
-  text-align: center;
+/* .sentence-container{
+  overflow-x: scroll;
+  min-height: 300px;
+  max-width: 100%;
+  border-radius: 25px;
+  border: 2px solid black;
+  justify-content: left;
+  background-color: aliceblue;
+}
+.folder-contents-container{
+  overflow-x: scroll;
+  min-height: 300px;
+  max-width: 100%;
+  border-radius: 25px;
+  border: 2px solid black;
+  padding: 20px; 
+  background-color: thistle
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.picture-card{
+  border-radius: 25px;
+  border: 2px solid grey;
+  padding: 20px; 
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  text-align: block;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 300px;
+  margin: auto;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-.App-link {
-  color: #61dafb;
+.picture-card:hover {
+  opacity: 0.7;
+  background-color: grey
+  
+}
+.picture-symbol {
+  justify-content: center;
+  text-align: center;
+  max-height: 50%;
+  background-color: white;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.folder-contents-container {
+  display: flex;
+  flex-wrap: wrap;
 }
+
+.container-cell {
+  flex: 1;} */

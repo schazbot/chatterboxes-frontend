@@ -1,22 +1,16 @@
 import React, { Component } from "react";
 import { Card, Image } from "semantic-ui-react";
 
-
 class PictureCard extends Component {
   render() {
     return (
-      <div>
+      <div className="picture-card">
         <Card>
-          <Image
-            src={this.props.picture.image_url}
-            wrapped
-            ui={false}
-          />
-          <Card.Content>
-            <Card.Header>{this.props.picture.name.toLowerCase()}</Card.Header>
-          </Card.Content>
+          <Image src={this.props.picture.url} />
+          <Card.Header color={"black"}>
+            {this.props.picture.text.toLowerCase()}
+          </Card.Header>
         </Card>
-     
       </div>
     );
   }
