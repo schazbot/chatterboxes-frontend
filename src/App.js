@@ -1,15 +1,17 @@
 import React, { Component } from "react";
 
 import "./App.css";
+// import Menu from "./components/MenuBar"
 import Sentence from "./containers/Sentence";
-import FolderContents from "./containers/FolderContents"
+import FolderContents from "./containers/FolderContents";
 
-const PICS_URL = "http://localhost:3002/api/v1/users/1";
+const USER_URL = "http://localhost:3002/api/v1/users/1";
 
-class App extends Component {
+export default class App extends Component {
   state = {
     allMyFolders: [],
-    selectedPictures: []
+    mySentence: [],
+    selectedPicture: null
   };
 
   componentDidMount() {
@@ -17,7 +19,7 @@ class App extends Component {
   }
 
   getMyPics = () => {
-    return fetch(PICS_URL)
+    return fetch(USER_URL)
       .then(resp => resp.json())
       .then(data =>
         this.setState({
@@ -29,11 +31,34 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Sentence />
-        {this.state.allMyFolders.map(f => <FolderContents folder={f}/> )}
+        <Sentence mySentence={this.state.mySentence} />
+        {this.state.allMyFolders.map(f => (
+          <FolderContents folder={f} handleClick={this.selectPicture} />
+        ))}
       </div>
     );
   }
-}
 
-export default App;
+  addToSentence = picture => {
+    if (!this.state.mySentence.includes(picture))
+      this.setState({ mySentence: [...this.state.mySentence, picture] });
+  };
+
+  // removeFromSentence = picture => {
+  //   let filteredPictures = this.state.mySentence.filter(
+  //     pic => pic.id !== picture.id
+  //   );
+  //   this.setState({ mySentence: filteredPictures });
+  // };
+
+  selectPicture = (selectedPicture) => {
+    this.setState({ selectedPicture: selectedPicture });
+    // debugger
+  };
+
+  // deselectPicture = () => {this.setState({selectedPicture : null})}
+
+
+
+
+}
