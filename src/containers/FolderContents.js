@@ -8,9 +8,9 @@ export default class FolderContents extends Component {
       <div className="folder-contents-container">
         <Grid container columns={3} textAlign={"center"}>
           {this.props.folder.pictures.map(picture => (
-            // <Grid.Column>
+            <Grid.Column>
               <PictureCard className="container-cell " picture={picture} handleClick={this.props.handleClick}/>
-            // </Grid.Column>
+            </Grid.Column>
           ))}
         </Grid>
       </div>

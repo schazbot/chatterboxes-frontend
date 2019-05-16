@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 
 import "./App.css";
-// import Menu from "./components/MenuBar"
 import Sentence from "./containers/Sentence";
+import FolderCard from "./components/FolderCard";
 import FolderContents from "./containers/FolderContents";
 
 const USER_URL = "http://localhost:3002/api/v1/users/1";
@@ -10,6 +10,7 @@ const USER_URL = "http://localhost:3002/api/v1/users/1";
 export default class App extends Component {
   state = {
     allMyFolders: [],
+    selectedFolder: null,
     mySentence: [],
     selectedPicture: null
   };
@@ -36,13 +37,23 @@ export default class App extends Component {
           handleClick={this.removeFromSentence}
           clearSentence={this.clearSentence}
         />
-        {this.state.allMyFolders.map(f => (
-          <FolderContents
-            folder={f}
-            handleClick={this.addToSentence}
+
+        {this.state.selectedFolder ? (
+          <>
+            <FolderContents
+            folder={this.state.selectedFolder}
+            handleClick={this.addToSentence}  
             mySentence={this.state.mySentence}
-          />
-        ))}
+            />
+          </>
+        ) : (
+          <>
+            {this.state.allMyFolders.map(folder => (
+              <FolderCard folder={folder}
+              handleClick={this.showFolder} />
+            ))}
+          </>
+        )}
       </div>
     );
   }
@@ -64,5 +75,9 @@ export default class App extends Component {
     this.setState({
       mySentence: []
     });
+  };
+
+  showFolder = selectedFolder => {
+    this.setState({ selectedFolder: selectedFolder });
   };
 }
