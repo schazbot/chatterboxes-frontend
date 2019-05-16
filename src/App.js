@@ -31,9 +31,17 @@ export default class App extends Component {
   render() {
     return (
       <div>
-        <Sentence mySentence={this.state.mySentence} />
+        <Sentence
+          mySentence={this.state.mySentence}
+          handleClick={this.removeFromSentence}
+          clearSentence={this.clearSentence}
+        />
         {this.state.allMyFolders.map(f => (
-          <FolderContents folder={f} handleClick={this.addToSentence} mySentence={this.state.mySentence}/>
+          <FolderContents
+            folder={f}
+            handleClick={this.addToSentence}
+            mySentence={this.state.mySentence}
+          />
         ))}
       </div>
     );
@@ -44,21 +52,17 @@ export default class App extends Component {
       this.setState({ mySentence: [...this.state.mySentence, picture] });
   };
 
-  // removeFromSentence = picture => {
-  //   let filteredPictures = this.state.mySentence.filter(
-  //     pic => pic.id !== picture.id
-  //   );
-  //   this.setState({ mySentence: filteredPictures });
-  // };
-
-  selectPicture = (selectedPicture) => {
-    this.setState({ selectedPicture: selectedPicture });
-    
+  removeFromSentence = picture => {
+    let filteredPictures = this.state.mySentence.filter(
+      pic => pic.id !== picture.id
+    );
+    this.setState({ mySentence: filteredPictures });
   };
 
-  // deselectPicture = () => {this.setState({selectedPicture : null})}
-
-
-
-
+  clearSentence = e => {
+    e.preventDefault();
+    this.setState({
+      mySentence: []
+    });
+  };
 }
