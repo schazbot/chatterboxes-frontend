@@ -5,7 +5,7 @@ const FolderCard = props => {
   const { folder } = props;
 
   return (
-    <Card key={props.folder.id} 
+    <Card  
     onClick={() => props.handleClick(folder)}>
 
       <Card.Header color={"black"}>

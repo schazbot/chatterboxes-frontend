@@ -24,7 +24,7 @@ class Sentence extends React.Component {
           Speak
         </SayButton>
           {this.props.mySentence.map(picture => (
-            <PictureCard
+            <PictureCard key={picture.id}
               handleClick={this.props.handleClick}
               picture={picture}
             />
