@@ -1,15 +1,18 @@
 import React from "react";
-import PictureCard from "../components/PictureCard"
+import PictureCard from "../components/PictureCard";
 import "font-awesome/css/font-awesome.min.css";
 import "../App.css";
 import { SayButton } from "react-say";
 import { Segment } from "semantic-ui-react";
+import { Button } from "semantic-ui-react";
 
 class Sentence extends React.Component {
   render() {
     return (
       <Segment color={"teal"} inverted size={"massive"}>
-      {this.props.mySentence.map(picture => <PictureCard picture={picture}/>)}
+        {this.props.mySentence.map(picture => (
+          <PictureCard handleClick={this.props.handleClick} picture={picture} />
+        ))}
         <SayButton
           className="speak-btn"
           onClick={event => console.log(event)}
@@ -18,6 +21,7 @@ class Sentence extends React.Component {
           <i className="fa fa-volume-up fa-7x" size="" />
           Speak
         </SayButton>
+        <Button onClick={this.props.clearSentence}>Clear</Button>
       </Segment>
     );
   }
