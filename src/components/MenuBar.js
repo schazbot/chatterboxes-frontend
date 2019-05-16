@@ -1,39 +1,50 @@
-import React, { Component } from 'react'
-import { Grid, Menu, Segment } from 'semantic-ui-react'
+import React, { Component } from "react";
+import { Menu, Icon } from "semantic-ui-react";
+import { Link } from "react-router-dom";
 
-export default class MenuBar extends Component {
-  state = { activeItem: 'bio' }
+export default class MenuExampleBasic extends Component {
+  state = {};
 
-  handleItemClick = (e, { name }) => this.setState({ activeItem: name })
+  handleItemClick = (e, { name }) => this.setState({ activeItem: name });
 
   render() {
-    const { activeItem } = this.state
+    const { activeItem } = this.state;
 
     return (
-      <Grid>
-        <Grid.Column width={4}>
-          <Menu fluid vertical tabular>
-            <Menu.Item name='bio' active={activeItem === 'bio'} onClick={this.handleItemClick} />
-            <Menu.Item name='pics' active={activeItem === 'pics'} onClick={this.handleItemClick} />
-            <Menu.Item
-              name='companies'
-              active={activeItem === 'companies'}
-              onClick={this.handleItemClick}
-            />
-            <Menu.Item
-              name='links'
-              active={activeItem === 'links'}
-              onClick={this.handleItemClick}
-            />
-          </Menu>
-        </Grid.Column>
+      <Menu icon="labeled">
+        <Menu.Item
+          name="folders"
+          as={Link}
+          to="/"
+          active={activeItem === "folders"}
+          onClick={this.handleItemClick}
+        >
+          <Icon name="folder" />
+          Folders
+        </Menu.Item>
 
-        <Grid.Column stretched width={12}>
-          <Segment>
-            This is an stretched grid column. This segment will always match the tab height
-          </Segment>
-        </Grid.Column>
-      </Grid>
-    )
+        <Menu.Item
+          name="create"
+          as={Link}
+          to="create"
+          active={activeItem === "create"}
+          onClick={this.handleItemClick}
+        >
+          <Icon name="plus" />
+          Create
+        </Menu.Item>
+
+        <Menu.Item
+          name="search"
+          as={Link}
+          to="/search"
+          active={activeItem === "search"}
+          onClick={this.handleItemClick}
+        >
+          <Icon name="search" />
+          Search
+        </Menu.Item>
+      </Menu>
+    );
   }
 }
