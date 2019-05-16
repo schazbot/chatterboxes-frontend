@@ -33,7 +33,7 @@ export default class App extends Component {
       <div>
         <Sentence mySentence={this.state.mySentence} />
         {this.state.allMyFolders.map(f => (
-          <FolderContents folder={f} handleClick={this.selectPicture} />
+          <FolderContents folder={f} handleClick={this.addToSentence} mySentence={this.state.mySentence}/>
         ))}
       </div>
     );
@@ -53,7 +53,7 @@ export default class App extends Component {
 
   selectPicture = (selectedPicture) => {
     this.setState({ selectedPicture: selectedPicture });
-    // debugger
+    
   };
 
   // deselectPicture = () => {this.setState({selectedPicture : null})}
