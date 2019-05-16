@@ -1,31 +1,39 @@
-import React from 'react';
-import { Header, Icon, Image, Menu, Segment, Sidebar } from 'semantic-ui-react'
+import React, { Component } from 'react'
+import { Grid, Menu, Segment } from 'semantic-ui-react'
 
+export default class MenuBar extends Component {
+  state = { activeItem: 'bio' }
 
-const MenuBar = () => (
-    <Sidebar.Pushable as={Segment}>
-      <Sidebar as={Menu} animation='overlay' icon='labeled' inverted vertical visible width='thin'>
-        <Menu.Item as='a'>
-          <Icon name='home' />
-          Home
-        </Menu.Item>
-        <Menu.Item as='a'>
-          <Icon name='gamepad' />
-          Games
-        </Menu.Item>
-        <Menu.Item as='a'>
-          <Icon name='camera' />
-          Channels
-        </Menu.Item>
-      </Sidebar>
-  
-      <Sidebar.Pusher>
-        <Segment basic>
-          <Header as='h3'>Application Content</Header>
-          <Image src='/images/wireframe/paragraph.png' />
-        </Segment>
-      </Sidebar.Pusher>
-    </Sidebar.Pushable>
-  )
-  
-  export default MenuBar
+  handleItemClick = (e, { name }) => this.setState({ activeItem: name })
+
+  render() {
+    const { activeItem } = this.state
+
+    return (
+      <Grid>
+        <Grid.Column width={4}>
+          <Menu fluid vertical tabular>
+            <Menu.Item name='bio' active={activeItem === 'bio'} onClick={this.handleItemClick} />
+            <Menu.Item name='pics' active={activeItem === 'pics'} onClick={this.handleItemClick} />
+            <Menu.Item
+              name='companies'
+              active={activeItem === 'companies'}
+              onClick={this.handleItemClick}
+            />
+            <Menu.Item
+              name='links'
+              active={activeItem === 'links'}
+              onClick={this.handleItemClick}
+            />
+          </Menu>
+        </Grid.Column>
+
+        <Grid.Column stretched width={12}>
+          <Segment>
+            This is an stretched grid column. This segment will always match the tab height
+          </Segment>
+        </Grid.Column>
+      </Grid>
+    )
+  }
+}

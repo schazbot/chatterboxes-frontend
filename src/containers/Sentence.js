@@ -9,10 +9,8 @@ import { Button } from "semantic-ui-react";
 class Sentence extends React.Component {
   render() {
     return (
-      <Segment color={"teal"} inverted size={"massive"}>
-        {this.props.mySentence.map(picture => (
-          <PictureCard handleClick={this.props.handleClick} picture={picture} />
-        ))}
+      <>
+        <Segment color={"teal"} inverted size={"massive"}>
         <SayButton
           className="speak-btn"
           onClick={event => console.log(event)}
@@ -21,8 +19,15 @@ class Sentence extends React.Component {
           <i className="fa fa-volume-up fa-7x" size="" />
           Speak
         </SayButton>
-        <Button onClick={this.props.clearSentence}>Clear</Button>
-      </Segment>
+          {this.props.mySentence.map(picture => (
+            <PictureCard
+              handleClick={this.props.handleClick}
+              picture={picture}
+            />
+          ))}
+          <Button onClick={this.props.clearSentence}>Clear</Button>
+        </Segment>
+      </>
     );
   }
 }
