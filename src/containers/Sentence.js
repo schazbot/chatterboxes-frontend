@@ -3,6 +3,8 @@ import PictureCard from "../components/PictureCard";
 import "font-awesome/css/font-awesome.min.css";
 import "../App.css";
 import { SayButton } from "react-say";
+import { Grid } from "semantic-ui-react";
+
 import { Segment } from "semantic-ui-react";
 import { Button } from "semantic-ui-react";
 
@@ -11,6 +13,8 @@ class Sentence extends React.Component {
     return (
       <>
         <Segment color={"teal"} inverted size={"massive"}>
+        <Grid  container columns={5}>
+        <Grid.Row>
         <SayButton
           className="speak-btn"
           onClick={event => console.log(event)}
@@ -26,6 +30,8 @@ class Sentence extends React.Component {
             />
           ))}
           <Button onClick={this.props.clearSentence}>Clear</Button>
+          </Grid.Row>
+        </Grid>
         </Segment>
       </>
     );
