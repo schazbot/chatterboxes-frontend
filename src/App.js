@@ -42,7 +42,7 @@ export default class App extends Component {
           <>
             <FolderContents
             folder={this.state.selectedFolder}
-            handleClick={this.state.selectFolder}  
+            handleClick={this.addToSentence}  
             mySentence={this.state.mySentence}
             />
           </>
