@@ -75,14 +75,19 @@ export default class App extends Component {
           }}
         />
         <Route
+        exact
+        path="/create"
+
+        component={NewFolderForm}
+      />
+        <Route
           exact
           path="/search"
 
           render={() => (
             <>
-              <NewFolderForm />
-              <Search />
               <FolderDropdown allMyFolders={this.state.allMyFolders}/>
+              <Search />
             </>
           )}
         />
