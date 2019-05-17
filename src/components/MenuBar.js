@@ -13,14 +13,14 @@ export default class MenuExampleBasic extends Component {
     return (
       <Menu icon="labeled">
         <Menu.Item
-          name="folders"
+          name="home"
           as={Link}
           to="/"
-          active={activeItem === "folders"}
+          active={activeItem === "home"}
           onClick={this.handleItemClick}
         >
-          <Icon name="folder" />
-          Folders
+          <Icon name="talk" />
+          Home
         </Menu.Item>
 
         <Menu.Item
@@ -30,19 +30,19 @@ export default class MenuExampleBasic extends Component {
           active={activeItem === "create"}
           onClick={this.handleItemClick}
         >
-          <Icon name="plus" />
-          Create
+          <Icon name="folder" />
+          Create Folder
         </Menu.Item>
 
         <Menu.Item
-          name="search"
+          name="add"
           as={Link}
-          to="/search"
-          active={activeItem === "search"}
+          to="/add"
+          active={activeItem === "add"}
           onClick={this.handleItemClick}
         >
-          <Icon name="search" />
-          Search
+          <Icon name="add" />
+          Add Words
         </Menu.Item>
       </Menu>
     );
