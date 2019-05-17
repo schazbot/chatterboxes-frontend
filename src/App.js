@@ -7,7 +7,7 @@ import Search from "./components/Search";
 import NewFolderForm from "./containers/NewFolderForm";
 import Sentence from "./containers/Sentence";
 import FolderCard from "./components/FolderCard";
-import FolderDropdown from "./components/FolderDropdown"
+import FolderDropdown from "./components/FolderDropdown";
 import FolderContents from "./containers/FolderContents";
 
 const USER_URL = "http://localhost:3002/api/v1/users/1";
@@ -65,7 +65,7 @@ export default class App extends Component {
                       <FolderCard
                         key={folder.id}
                         folder={folder}
-                        handleClick={this.showFolder}
+                        handleClick={this.setFolder}
                       />
                     ))}
                   </>
@@ -74,19 +74,13 @@ export default class App extends Component {
             );
           }}
         />
-        <Route
-        exact
-        path="/create"
-
-        component={NewFolderForm}
-      />
+        <Route exact path="/create" component={NewFolderForm} />
         <Route
           exact
-          path="/search"
-
+          path="/add"
           render={() => (
             <>
-              <FolderDropdown allMyFolders={this.state.allMyFolders}/>
+              <FolderDropdown allMyFolders={this.state.allMyFolders} />
               <Search />
             </>
           )}
@@ -114,7 +108,7 @@ export default class App extends Component {
     });
   };
 
-  showFolder = selectedFolder => {
-    this.setState({ selectedFolder: selectedFolder });
+  setFolder = selectedFolder => {
+    this.setState({ selectedFolder });
   };
 }
