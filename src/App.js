@@ -15,8 +15,7 @@ export default class App extends Component {
     allMyFolders: [],
     selectedFolder: null,
     mySentence: [],
-    selectedPicture: null,
-    searchTerm: ""
+    selectedPicture: null
   };
 
   componentDidMount() {
@@ -47,7 +46,7 @@ export default class App extends Component {
         <Route
           exact
           path="/"
-          component={() => {
+          render={() => {
             return (
               <div>
                 {this.state.selectedFolder ? (
@@ -112,7 +111,6 @@ export default class App extends Component {
     this.setState({ selectedFolder: selectedFolder });
   };
 
-  updateSearchTerm = searchTerm => {
-    this.setState({ searchTerm: searchTerm });
-  };
+
+
 }
