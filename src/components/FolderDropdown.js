@@ -7,7 +7,8 @@ class FolderDropdown extends Component {
       return {
         key: folder.name,
         text: folder.name,
-        value: folder.name
+        value: folder.name,
+        image: folder.image
       };
     });
   };

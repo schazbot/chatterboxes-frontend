@@ -8,7 +8,7 @@ export default class Search extends Component {
     searchResults: []
   };
 
-  onChange = e => {
+  handleOnChange = e => {
     const { value } = e.target;
     this.setState({
       searchTerm: value
@@ -43,7 +43,7 @@ export default class Search extends Component {
             type="text"
             className="search-box"
             placeholder="Search for..."
-            onChange={this.onChange}
+            onChange={this.handleOnChange}
           />
         </form>
         {this.state.searchResults.map(picture => (
