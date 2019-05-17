@@ -1,12 +1,14 @@
 import React, { Component } from "react";
+import { Route } from "react-router-dom";
 import "./App.css";
+
 import MenuBar from "./components/MenuBar";
 import Search from "./components/Search";
-import SearchForm from "./containers/SearchForm";
+import NewFolderForm from "./containers/NewFolderForm";
 import Sentence from "./containers/Sentence";
 import FolderCard from "./components/FolderCard";
+import FolderDropdown from "./components/FolderDropdown"
 import FolderContents from "./containers/FolderContents";
-import { Route } from "react-router-dom";
 
 const USER_URL = "http://localhost:3002/api/v1/users/1";
 
@@ -75,14 +77,14 @@ export default class App extends Component {
         <Route
           exact
           path="/search"
-          render={() =>
-              <>
-                <Search
-                  searchTerm={this.state.searchTerm}
-                  updateSearchTerm={this.updateSearchTerm}
-                />
-              </>
-          }
+
+          render={() => (
+            <>
+              <NewFolderForm />
+              <Search />
+              <FolderDropdown allMyFolders={this.state.allMyFolders}/>
+            </>
+          )}
         />
       </div>
     );
@@ -110,7 +112,4 @@ export default class App extends Component {
   showFolder = selectedFolder => {
     this.setState({ selectedFolder: selectedFolder });
   };
-
-
-
 }
