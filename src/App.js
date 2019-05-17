@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import "./App.css";
 import MenuBar from "./components/MenuBar";
+import Search from "./components/Search";
+import SearchForm from "./containers/SearchForm";
 import Sentence from "./containers/Sentence";
 import FolderCard from "./components/FolderCard";
 import FolderContents from "./containers/FolderContents";
@@ -13,7 +15,8 @@ export default class App extends Component {
     allMyFolders: [],
     selectedFolder: null,
     mySentence: [],
-    selectedPicture: null
+    selectedPicture: null,
+    searchTerm: ""
   };
 
   componentDidMount() {
@@ -70,6 +73,18 @@ export default class App extends Component {
             );
           }}
         />
+        <Route
+          exact
+          path="/search"
+          render={() =>
+              <>
+                <Search
+                  searchTerm={this.state.searchTerm}
+                  updateSearchTerm={this.updateSearchTerm}
+                />
+              </>
+          }
+        />
       </div>
     );
   }
@@ -96,7 +111,8 @@ export default class App extends Component {
   showFolder = selectedFolder => {
     this.setState({ selectedFolder: selectedFolder });
   };
-  selectFolder = selectedFolder => {
-    this.setState({ selectedFolder: selectedFolder });
+
+  updateSearchTerm = searchTerm => {
+    this.setState({ searchTerm: searchTerm });
   };
 }
