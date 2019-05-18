@@ -5,7 +5,7 @@ const PictureCard = props => {
   const { picture } = props;
 
   return (
-    <Card>
+    <Card onClick={() => props.handlePictureSelection(picture)}>
       <Image src={picture.image_url} />
       <Card.Header color={"black"}>
         {picture.name.toLowerCase()}

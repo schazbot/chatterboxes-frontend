@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import APICard from "./APICard";
 
 export default class Search extends Component {
-
-
   render() {
     return (
       <>
@@ -16,7 +14,11 @@ export default class Search extends Component {
           />
         </form>
         {this.props.searchResults.map(picture => (
-          <APICard picture={picture} key={picture.id} />
+          <APICard
+            picture={picture}
+            key={picture.id}
+            handlePictureSelection={this.props.handlePictureSelection}
+          />
         ))}
       </>
     );
