@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import { Dropdown, Search } from "semantic-ui-react";
+import { Dropdown } from "semantic-ui-react";
 
 class FolderDropdown extends Component {
   state = {
-    folder_id: ""
+   
   };
 
   parsedDropdownOptions = () => {
@@ -20,9 +20,7 @@ class FolderDropdown extends Component {
 
  
 
-  handleSelectionChange = (e, { value }) => {
-    this.setState({folder_id: value });
-  };
+  
 
   render() {
     const { parsedDropdownOptions } = this;
@@ -33,7 +31,7 @@ class FolderDropdown extends Component {
           selection
           text="Choose a folder"
           options={parsedDropdownOptions()}
-          onChange={this.handleSelectionChange}
+          onChange={this.props.handleSelectionChange}
         />
 
       </>
