@@ -31,7 +31,7 @@ class FolderDropdown extends Component {
           selection
           text="Choose a folder"
           options={parsedDropdownOptions()}
-          onChange={this.props.handleSelectionChange}
+          onChange={this.props.handleFolderSelectionChange}
         />
 
       </>

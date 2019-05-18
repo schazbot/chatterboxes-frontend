@@ -7,12 +7,18 @@ class CreateContainer extends Component {
   state = {
     folder_id: "",
     searchTerm: "",
-    searchResults: []
+    searchResults: [],
+    selectedSearchResult: null
   };
 
-  handleSelectionChange = (e, { value }) => {
+  handleFolderSelectionChange = (e, { value }) => {
     this.setState({ folder_id: value });
   };
+
+  handlePictureSelection = (value) => {
+    this.setState({ selectedSearchResult:{text: value.name,
+    url: value.image_url} });
+  }
 
   handleSearchQuery = e => {
     const { value } = e.target;
@@ -47,13 +53,13 @@ class CreateContainer extends Component {
         <NewFolderForm />
         <FolderDropdown
           allMyFolders={this.props.allMyFolders}
-          folderId={this.state.folder_id}
-          handleSelectionChange={this.handleSelectionChange}
+          handleFolderSelectionChange={this.handleFolderSelectionChange}
         />
         <Search
-          handleSearchQuery={this.handleSearchQuery}
           searchTerm={this.state.searchTerm}
           searchResults={this.state.searchResults}
+          handleSearchQuery={this.handleSearchQuery}
+          handlePictureSelection={this.handlePictureSelection}
         />
       </>
     );
