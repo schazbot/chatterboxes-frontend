@@ -13,25 +13,34 @@ class Sentence extends React.Component {
     return (
       <>
         <Segment color={"teal"} inverted size={"massive"}>
-        <Grid  container columns={5}>
-        <Grid.Row>
-        <SayButton
-          className="speak-btn"
-          onClick={event => console.log(event)}
-          speak={this.props.mySentence.map(picture => picture.text)}
-        >
-          <i className="fa fa-volume-up fa-7x" size="" />
-          Speak
-        </SayButton>
-          {this.props.mySentence.map(picture => (
-            <PictureCard key={picture.id}
-              handleClick={this.props.handleClick}
-              picture={picture}
-            />
-          ))}
-          <Button onClick={this.props.clearSentence}>Clear</Button>
-          </Grid.Row>
-        </Grid>
+          <Grid equal width grid container columns={10}>
+            <Grid.Row>
+              <Grid.Column left floated>
+                <SayButton
+                  className="speak-btn"
+                  onClick={event => console.log(event)}
+                  speak={this.props.mySentence.map(picture => picture.text)}
+                >
+                  <i className="fa fa-volume-up fa-7x" size="" />
+                  Speak
+                </SayButton>
+              </Grid.Column>
+
+              {this.props.mySentence.map(picture => (
+                <Grid.Column>
+                  <PictureCard
+                    key={picture.id}
+                    handleClick={this.props.handleClick}
+                    picture={picture}
+                  />
+                </Grid.Column>
+              ))}
+
+              <Grid.Column right floated>
+                <Button onClick={this.props.clearSentence}>Clear</Button>
+              </Grid.Column>
+            </Grid.Row>
+          </Grid>
         </Segment>
       </>
     );

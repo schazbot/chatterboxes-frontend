@@ -7,6 +7,7 @@ import CreateContainer from "./containers/CreateContainer";
 import Sentence from "./containers/Sentence";
 import FolderCard from "./components/FolderCard";
 import FolderContents from "./containers/FolderContents";
+import { Grid } from "semantic-ui-react";
 
 const USER_URL = "http://localhost:3002/api/v1/users/1";
 
@@ -59,13 +60,19 @@ export default class App extends Component {
                   </>
                 ) : (
                   <>
-                    {this.state.allMyFolders.map(folder => (
-                      <FolderCard
-                        key={folder.id}
-                        folder={folder}
-                        handleClick={this.setFolder}
-                      />
-                    ))}
+                    <Grid container columns={6}>
+                      <Grid.Row>
+                        {this.state.allMyFolders.map(folder => (
+                          <Grid.Column key={folder.name}>
+                            <FolderCard
+                              key={folder.id}
+                              folder={folder}
+                              handleClick={this.setFolder}
+                            />
+                          </Grid.Column>
+                        ))}
+                      </Grid.Row>
+                    </Grid>
                   </>
                 )}
               </div>

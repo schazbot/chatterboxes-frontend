@@ -1,10 +1,8 @@
 import React, { Component } from "react";
-import { Dropdown } from "semantic-ui-react";
+import { Dropdown, Grid, Icon, Label } from "semantic-ui-react";
 
 class FolderDropdown extends Component {
-  state = {
-   
-  };
+  state = {};
 
   parsedDropdownOptions = () => {
     return this.props.allMyFolders.map(folder => {
@@ -18,22 +16,24 @@ class FolderDropdown extends Component {
     });
   };
 
- 
-
-  
-
   render() {
     const { parsedDropdownOptions } = this;
     return (
       <>
-        <Dropdown
-          placeholder="Select Folder"
-          selection
-          text="Choose a folder"
-          options={parsedDropdownOptions()}
-          onChange={this.props.handleFolderSelectionChange}
-        />
-
+        <Grid.Row relaxed>
+          <Label color="teal">
+            <Icon name="picture" size="big" /> Add pictures to folder
+          </Label>
+        </Grid.Row>
+        <Grid.Row>
+          <Dropdown
+            placeholder="Select Folder"
+            selection
+            text="Choose a folder"
+            options={parsedDropdownOptions()}
+            onChange={this.props.handleFolderSelectionChange}
+          />
+        </Grid.Row>
       </>
     );
   }
