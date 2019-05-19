@@ -18,6 +18,8 @@ export default class Search extends Component {
             picture={picture}
             key={picture.id}
             handlePictureSelection={this.props.handlePictureSelection}
+            createPicture={this.props.createPicture}
+            handleOnSubmit={this.props.handleOnSubmit}
           />
         ))}
       </>
