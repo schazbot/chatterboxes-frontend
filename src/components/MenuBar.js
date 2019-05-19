@@ -23,7 +23,7 @@ export default class MenuExampleBasic extends Component {
           Home
         </Menu.Item>
 
-        <Menu.Item
+        {/* <Menu.Item
           name="create"
           as={Link}
           to="create"
@@ -32,7 +32,7 @@ export default class MenuExampleBasic extends Component {
         >
           <Icon name="folder" />
           Create Folder
-        </Menu.Item>
+        </Menu.Item> */}
 
         <Menu.Item
           name="add"
@@ -41,8 +41,8 @@ export default class MenuExampleBasic extends Component {
           active={activeItem === "add"}
           onClick={this.handleItemClick}
         >
-          <Icon name="add" />
-          Add Words
+          <Icon name="plus square outline" />
+          Create and Add
         </Menu.Item>
       </Menu>
     );

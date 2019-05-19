@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, Form } from "semantic-ui-react";
+import { Button, Form, Label, Icon, Grid } from "semantic-ui-react";
 
 const NEW_FOLDER_URL = "http://localhost:3002/api/v1/folders";
 
@@ -35,24 +35,40 @@ class NewFolderForm extends Component {
 
   render() {
     return (
-      <Form onSubmit={this.createNewFolder}>
-        <label>New Folder</label>
-        <input
-          type="text"
-          id="name"
-          onChange={event => this.handleNameChange(event)}
-          value={this.state.name}
-          placeholder="Folder Name"
-        />
-        <input
-          type="text"
-          id="image_url"
-          onChange={event => this.handleUrlChange(event)}
-          placeholder="Add image url"
-          value={this.state.image_url}
-        />
-        <Button type="submit">Submit</Button>
-      </Form>
+      <Grid columns={1}>
+        <Grid.Row>
+          <Label color="teal">
+            <Icon name="folder outline" size="big" /> Create new Folder
+          </Label>
+        </Grid.Row>
+        <Grid.Row>
+          <Form onSubmit={this.createNewFolder}>
+            <Form.Field inline>
+              <input
+                type="text"
+                id="name"
+                onChange={event => this.handleNameChange(event)}
+                value={this.state.name}
+                placeholder="Folder Name"
+              />
+              <Label pointing="left">Name</Label>
+            </Form.Field>
+            <Form.Field inline>
+              <input
+                type="text"
+                id="image_url"
+                onChange={event => this.handleUrlChange(event)}
+                placeholder="Add image url"
+                value={this.state.image_url}
+              />
+              <Label pointing="left">Image Url</Label>
+            </Form.Field>
+            <Button positive type="submit">
+              Submit
+            </Button>
+          </Form>
+        </Grid.Row>
+      </Grid>
     );
   }
 }
