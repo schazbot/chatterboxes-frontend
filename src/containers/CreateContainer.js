@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Grid, Card } from "semantic-ui-react";
+import { Grid } from "semantic-ui-react";
 
 import NewFolderForm from "./NewFolderForm";
 import APICard from "../components/APICard";

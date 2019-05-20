@@ -15,7 +15,7 @@ export default class MenuExampleBasic extends Component {
         <Menu.Item
           name="home"
           as={Link}
-          to="/"
+          to="/home"
           active={activeItem === "home"}
           onClick={this.handleItemClick}
         >

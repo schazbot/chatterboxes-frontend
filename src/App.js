@@ -2,13 +2,15 @@ import React, { Component } from "react";
 import { Route } from "react-router-dom";
 
 import "./App.css";
-import { Grid, Label, Form } from "semantic-ui-react";
+import { Grid, Label} from "semantic-ui-react";
 
 import MenuBar from "./components/MenuBar";
 import CreateContainer from "./containers/CreateContainer";
 import Sentence from "./containers/Sentence";
 import FolderCard from "./components/FolderCard";
 import FolderContents from "./containers/FolderContents";
+import FolderContentsEdit from "./containers/FolderContentsEdit";
+
 
 const USER_URL = "http://localhost:3002/api/v1/users/1";
 
@@ -41,7 +43,7 @@ export default class App extends Component {
 
         <Route
           exact
-          path="/"
+          path="/home"
           render={() => {
             return (
               <div>
@@ -95,17 +97,9 @@ export default class App extends Component {
             <>
               {this.state.selectedFolder ? (
                 <>
-                  <Form>
-                    <Form.Field>
-                      <Label pointing="down" size={"massive"}>
-                        Edit folder name
-                      </Label>
+                
 
-                      <input placeholder={this.state.selectedFolder.name} />
-                    </Form.Field>
-                  </Form>
-
-                  <FolderContents
+                  <FolderContentsEdit
                     folder={this.state.selectedFolder}
                     handleClick={this.addToSentence}
                     mySentence={this.state.mySentence}
