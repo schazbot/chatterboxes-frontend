@@ -5,15 +5,19 @@ const PictureCard = props => {
   const { picture } = props;
 
   return (
-    <Card 
+    <Card
       onSubmit={props.handleOnSubmit}
       onClick={() => props.handlePictureSelection(picture)}
     >
-      <Image src={picture.image_url} />
-      <Card.Header color={"black"}>{picture.name.toLowerCase()}</Card.Header>
-      <Button positive onClick={props.handleOnSubmit}>
-        Add to Folder
-      </Button>
+      <Card.Content>
+        <Image src={picture.image_url} />
+        <Card.Description color={"black"}>
+          {picture.name.toLowerCase()}
+        </Card.Description>
+        <Button positive onClick={props.handleOnSubmit}>
+          Add to Folder
+        </Button>
+      </Card.Content>
     </Card>
   );
 };

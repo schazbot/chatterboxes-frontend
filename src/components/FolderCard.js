@@ -5,9 +5,12 @@ const FolderCard = props => {
   const { folder } = props;
 
   return (
-    <Card onClick={() => props.handleClick(folder)}>
-      <Image src={folder.image} />
-      <Card.Header>{folder.name.toLowerCase()}</Card.Header>
+    <Card onClick={() => props.handleClick(folder)} wrapped ui={false}>
+      <Card.Content>
+        <Image src={folder.image} />
+
+        <Card.Description>{folder.name.toLowerCase()}</Card.Description>
+      </Card.Content>
     </Card>
   );
 };
