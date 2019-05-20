@@ -47,9 +47,9 @@ class CreateContainer extends Component {
       })
     });
   };
-  
 
-  handleOnSubmit = () => {
+  handleOnSubmit = e => {
+    e.preventDefault();
     this.createPicture();
     this.createFolderPicture();
   };
@@ -91,7 +91,7 @@ class CreateContainer extends Component {
           <Grid.Column relaxed>
             <Grid.Row>
               <FolderDropdown
-              folderId={this.state.folder_id}
+                folderId={this.state.folder_id}
                 allMyFolders={this.props.allMyFolders}
                 handleFolderSelectionChange={this.handleFolderSelectionChange}
               />
@@ -115,9 +115,9 @@ class CreateContainer extends Component {
               <APICard
                 picture={picture}
                 key={picture.id}
-                handlePictureSelection={this.props.handlePictureSelection}
+                handlePictureSelection={this.handlePictureSelection}
                 createPicture={this.props.createPicture}
-                handleOnSubmit={this.props.handleOnSubmit}
+                handleOnSubmit={this.handleOnSubmit}
               />
             </Grid.Column>
           ))}
