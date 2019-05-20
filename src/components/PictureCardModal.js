@@ -39,7 +39,7 @@ const PictureCardModal = props => {
               Save
             </Button>
 
-            <Button color={"red"}>Delete</Button>
+            <Button onClick={props.deletePicture} color={"red"}>Delete</Button>
             <Label size={"big"}>Delete picture from folder</Label>
           </Form>
         </Modal.Content>

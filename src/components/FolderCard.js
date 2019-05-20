@@ -5,11 +5,11 @@ const FolderCard = props => {
   const { folder } = props;
 
   return (
-    <Card onClick={() => props.handleClick(folder)} wrapped ui={false}>
+    <Card color='black' onClick={() => props.handleClick(folder)} wrapped ui={false}>
       <Card.Content>
         <Image src={folder.image} />
 
-        <Card.Description>{folder.name.toLowerCase()}</Card.Description>
+        <Card.Description textAlign={"center"}>{folder.name.toLowerCase()}</Card.Description>
       </Card.Content>
     </Card>
   );

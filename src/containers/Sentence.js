@@ -9,10 +9,15 @@ class Sentence extends React.Component {
   render() {
     return (
       <>
-        <Segment className="sentence-segment" color={"teal"} inverted size={"medium"}>
-          <Grid celled equal width grid container columns={8}>
+        <Segment
+          className="sentence-segment"
+          color={"teal"}
+          inverted
+          size={"medium"}
+        >
+          <Grid fluid celled grid container columns={8}>
             <Grid.Row>
-              <Grid.Column left floated>
+              <Grid.Column>
                 <SayButton
                   className="speak-btn"
                   onClick={event => console.log(event)}
@@ -24,16 +29,20 @@ class Sentence extends React.Component {
               </Grid.Column>
               {this.props.mySentence.map(picture => (
                 <Grid.Column>
-                  <PictureCard wrapped ui={false}
+                  <PictureCard
+                    width={6}
+                    wrapped
+                    ui={false}
                     key={picture.id}
                     handleClick={this.props.handleClick}
                     picture={picture}
                   />
                 </Grid.Column>
               ))}
-
               <Grid.Column right floated>
-                <Button onClick={this.props.clearSentence}>Clear</Button>
+                <Button right floated onClick={this.props.clearSentence}>
+                  Clear
+                </Button>
               </Grid.Column>
             </Grid.Row>
           </Grid>

@@ -34,6 +34,12 @@ export default class FolderContents extends Component {
     }).then(alert("Text saved!"));
   };
 
+  deletePicture = () => {
+    return fetch(EDIT_PICTURE_PATH + `${this.state.selectedPicture.id}`, {
+      method: "DELETE"
+    }).then(alert("Picture deleted!"));
+  };
+
   handleFormChange = e => {
     const { value } = e.target;
     this.setState({ folder: { name: value } });
@@ -80,6 +86,7 @@ export default class FolderContents extends Component {
                   picture={picture}
                   setPicture={this.setPicture}
                   editPicture={this.editPicture}
+                  deletePicture={this.deletePicture}
                   handlePictureFormChange={this.handlePictureFormChange}
                 />
               </Grid.Column>
