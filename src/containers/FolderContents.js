@@ -20,7 +20,7 @@ export default class FolderContents extends Component {
               </Grid.Column>
             ))}
           </Grid.Row>
-          <Button>Back</Button>
+          <Button onClick={this.props.resetSelectedFolder}>Back</Button>
         </Grid>
       </div>
     );

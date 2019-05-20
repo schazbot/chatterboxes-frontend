@@ -58,6 +58,7 @@ export default class App extends Component {
                       folder={this.state.selectedFolder}
                       handleClick={this.addToSentence}
                       mySentence={this.state.mySentence}
+                      resetSelectedFolder={this.resetSelectedFolder}
                     />
                   </>
                 ) : (
@@ -103,6 +104,7 @@ export default class App extends Component {
                     folder={this.state.selectedFolder}
                     handleClick={this.addToSentence}
                     mySentence={this.state.mySentence}
+                    resetSelectedFolder={this.resetSelectedFolder}
                   />
                 </>
               ) : (
@@ -153,5 +155,8 @@ export default class App extends Component {
 
   setFolder = selectedFolder => {
     this.setState({ selectedFolder });
+  };
+  resetSelectedFolder = () => {
+    this.setState({ selectedFolder: null });
   };
 }

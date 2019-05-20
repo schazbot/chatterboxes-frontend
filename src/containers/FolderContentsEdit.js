@@ -10,12 +10,12 @@ export default class FolderContents extends Component {
     picture: { text: "" }
   };
 
-  editPicture = () => {
+  editFolder = () => {
     return fetch(EDIT_FOLDER_PATH, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        text: this.state.picture.text
+        text: this.state.folder.name
       })
     });
   };
@@ -29,7 +29,7 @@ export default class FolderContents extends Component {
               Edit folder name
             </Label>
             <input placeholder={this.props.folder.name} />
-            <Button color={"red"}>Save</Button>
+            <Button onClick={this.editFolder}color={"red"}>Save</Button>
           </Form.Field>
         </Form>
 
@@ -50,7 +50,7 @@ export default class FolderContents extends Component {
               </Grid.Column>
             ))}
           </Grid.Row>
-          <Button>Back</Button>
+          <Button onClick={this.props.resetSelectedFolder}>Back</Button>
         </Grid>
       </div>
     );
