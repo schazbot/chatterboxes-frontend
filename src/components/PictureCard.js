@@ -5,12 +5,13 @@ const PictureCard = props => {
   const { picture } = props;
 
   return (
-    <Card key={props.picture.id} onClick={() => props.handleClick(picture)}>
-    
+    <Card key={props.picture.id} onClick={() => props.handleClick(picture)}wrapped ui={false}>
+    <Card.Content>
       <Image src={props.picture.url} />
-      <Card.Header color={"black"}>
+      <Card.Description>
         {props.picture.text.toLowerCase()}
-      </Card.Header>
+      </Card.Description>
+      </Card.Content>
     </Card>
   );
 };

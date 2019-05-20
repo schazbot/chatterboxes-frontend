@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Grid} from "semantic-ui-react";
+import { Grid, Card } from "semantic-ui-react";
 
 import NewFolderForm from "./NewFolderForm";
 import APICard from "../components/APICard";
@@ -47,6 +47,7 @@ class CreateContainer extends Component {
       })
     });
   };
+  
 
   handleOnSubmit = () => {
     this.createPicture();
@@ -81,17 +82,16 @@ class CreateContainer extends Component {
 
   render() {
     return (
-      <Grid className="main-grid" relaxed celled >
+      <Grid className="main-grid" relaxed celled>
         <Grid.Row columns={2} divided relaxed>
-          <Grid.Column >
+          <Grid.Column>
             <NewFolderForm />
           </Grid.Column>
 
-          <Grid.Column relaxed >
-          
-            
+          <Grid.Column relaxed>
             <Grid.Row>
               <FolderDropdown
+              folderId={this.state.folder_id}
                 allMyFolders={this.props.allMyFolders}
                 handleFolderSelectionChange={this.handleFolderSelectionChange}
               />

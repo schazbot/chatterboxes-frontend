@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { Dropdown, Grid, Icon, Label } from "semantic-ui-react";
+// import FolderCard from "../components/FolderCard";
+
 
 class FolderDropdown extends Component {
-  state = {};
-
   parsedDropdownOptions = () => {
     return this.props.allMyFolders.map(folder => {
       return {
@@ -15,6 +15,12 @@ class FolderDropdown extends Component {
       };
     });
   };
+
+  // findFolder = () => {
+  //   return this.props.allMyFolders.filter(
+  //     folder => folder.id === this.props.folder_id
+  //   );
+  // };
 
   render() {
     const { parsedDropdownOptions } = this;
@@ -31,8 +37,12 @@ class FolderDropdown extends Component {
             selection
             text="Choose a folder"
             options={parsedDropdownOptions()}
+            
             onChange={this.props.handleFolderSelectionChange}
           />
+          {/* {this.props.folderId ? (
+          this.findFolder()
+          ) : null} */}
         </Grid.Row>
       </>
     );

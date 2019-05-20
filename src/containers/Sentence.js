@@ -3,17 +3,14 @@ import PictureCard from "../components/PictureCard";
 import "font-awesome/css/font-awesome.min.css";
 import "../App.css";
 import { SayButton } from "react-say";
-import { Grid } from "semantic-ui-react";
-
-import { Segment } from "semantic-ui-react";
-import { Button } from "semantic-ui-react";
+import { Grid, Segment, Button } from "semantic-ui-react";
 
 class Sentence extends React.Component {
   render() {
     return (
       <>
-        <Segment color={"teal"} inverted size={"massive"}>
-          <Grid equal width grid container columns={10}>
+        <Segment className="sentence-segment" color={"teal"} inverted size={"medium"}>
+          <Grid celled equal width grid container columns={8}>
             <Grid.Row>
               <Grid.Column left floated>
                 <SayButton
@@ -25,10 +22,9 @@ class Sentence extends React.Component {
                   Speak
                 </SayButton>
               </Grid.Column>
-
               {this.props.mySentence.map(picture => (
                 <Grid.Column>
-                  <PictureCard
+                  <PictureCard wrapped ui={false}
                     key={picture.id}
                     handleClick={this.props.handleClick}
                     picture={picture}

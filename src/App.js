@@ -1,13 +1,14 @@
 import React, { Component } from "react";
 import { Route } from "react-router-dom";
+
 import "./App.css";
+import { Grid, Label, Form } from "semantic-ui-react";
 
 import MenuBar from "./components/MenuBar";
 import CreateContainer from "./containers/CreateContainer";
 import Sentence from "./containers/Sentence";
 import FolderCard from "./components/FolderCard";
 import FolderContents from "./containers/FolderContents";
-import { Grid } from "semantic-ui-react";
 
 const USER_URL = "http://localhost:3002/api/v1/users/1";
 
@@ -38,18 +39,17 @@ export default class App extends Component {
       <div>
         <MenuBar />
 
-        <Sentence
-          mySentence={this.state.mySentence}
-          handleClick={this.removeFromSentence}
-          clearSentence={this.clearSentence}
-        />
-
         <Route
           exact
           path="/"
           render={() => {
             return (
               <div>
+                <Sentence
+                  mySentence={this.state.mySentence}
+                  handleClick={this.removeFromSentence}
+                  clearSentence={this.clearSentence}
+                />
                 {this.state.selectedFolder ? (
                   <>
                     <FolderContents
@@ -85,6 +85,52 @@ export default class App extends Component {
           render={() => (
             <>
               <CreateContainer allMyFolders={this.state.allMyFolders} />
+            </>
+          )}
+        />
+        <Route
+          exact
+          path="/edit"
+          render={() => (
+            <>
+              {this.state.selectedFolder ? (
+                <>
+                  <Form>
+                    <Form.Field>
+                      <Label pointing="down" size={"massive"}>
+                        Edit folder name
+                      </Label>
+
+                      <input placeholder={this.state.selectedFolder.name} />
+                    </Form.Field>
+                  </Form>
+
+                  <FolderContents
+                    folder={this.state.selectedFolder}
+                    handleClick={this.addToSentence}
+                    mySentence={this.state.mySentence}
+                  />
+                </>
+              ) : (
+                <>
+                  <Label pointing="down" size={"massive"}>
+                    Choose a folder to edit
+                  </Label>
+                  <Grid container columns={6}>
+                    <Grid.Row>
+                      {this.state.allMyFolders.map(folder => (
+                        <Grid.Column key={folder.name}>
+                          <FolderCard
+                            key={folder.id}
+                            folder={folder}
+                            handleClick={this.setFolder}
+                          />
+                        </Grid.Column>
+                      ))}
+                    </Grid.Row>
+                  </Grid>
+                </>
+              )}
             </>
           )}
         />
