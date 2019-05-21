@@ -6,15 +6,13 @@ const PictureCard = props => {
 
   return (
     <Card
-      onSubmit={props.handleOnSubmit}
-      onClick={() => props.handlePictureSelection(picture)}
     >
       <Card.Content>
         <Image src={picture.image_url} />
         <Card.Description color={"black"}>
-          {picture.name.toLowerCase()}
+          {picture.name}
         </Card.Description>
-        <Button positive onClick={props.handleOnSubmit}>
+        <Button positive onClick={() => props.handlePictureSelection(picture)}>
           Add to Folder
         </Button>
       </Card.Content>

@@ -23,10 +23,11 @@ class CreateContainer extends Component {
     this.setState({ folder_id: value });
   };
 
-  handlePictureSelection = value => {
+  handlePictureSelection = (value) => {
     this.setState({
       selectedSearchResult: { text: value.name, url: value.image_url }
-    });
+    })
+    setTimeout(() =>this.handleOnSubmit(), 500)
   };
 
   createFolderPicture = () => {
@@ -48,10 +49,11 @@ class CreateContainer extends Component {
     });
   };
 
-  handleOnSubmit = e => {
-    e.preventDefault();
+  handleOnSubmit = () => {
+    // e.preventDefault();
     this.createPicture();
-    this.createFolderPicture();
+    setTimeout(() =>this.createFolderPicture(), 1000)
+    ;
   };
 
   handleSearchQuery = e => {
