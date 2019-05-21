@@ -6,8 +6,6 @@ import APICard from "../components/APICard";
 import FolderDropdown from "../components/FolderDropdown";
 import SearchComponent from "../components/SearchComponent";
 
-const FOLDER_PICTURES_PATH =
-  "http://localhost:3002/api/v1/folder_pictures/create";
 const PICTURES_PATH = "http://localhost:3002/api/v1/pictures/create";
 
 class CreateContainer extends Component {
@@ -26,15 +24,7 @@ class CreateContainer extends Component {
   handlePictureSelection = value => {
     this.setState({
       selectedSearchResult: { text: value.name, url: value.image_url }
-    });
-  };
-
-  createFolderPicture = () => {
-    return fetch(FOLDER_PICTURES_PATH, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ folder_id: this.state.folder_id })
-    });
+    }, this.createPicture);
   };
 
   createPicture = () => {
@@ -42,16 +32,16 @@ class CreateContainer extends Component {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
+        folder_id: this.state.folder_id,
         text: this.state.selectedSearchResult.text,
         url: this.state.selectedSearchResult.url
       })
     });
   };
 
-  handleOnSubmit = e => {
-    e.preventDefault();
-    this.createPicture();
-    this.createFolderPicture();
+  handleOnSubmit = () => {
+    // e.preventDefault();
+    this.handlePictureSelection();
   };
 
   handleSearchQuery = e => {

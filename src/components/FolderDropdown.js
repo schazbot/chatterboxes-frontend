@@ -16,11 +16,6 @@ class FolderDropdown extends Component {
     });
   };
 
-  // findFolder = () => {
-  //   return this.props.allMyFolders.filter(
-  //     folder => folder.id === this.props.folder_id
-  //   );
-  // };
 
   render() {
     const { parsedDropdownOptions } = this;
@@ -40,9 +35,7 @@ class FolderDropdown extends Component {
             
             onChange={this.props.handleFolderSelectionChange}
           />
-          {/* {this.props.folderId ? (
-          this.findFolder()
-          ) : null} */}
+       
         </Grid.Row>
       </>
     );
