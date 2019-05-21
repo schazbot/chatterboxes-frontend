@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import { Dropdown, Grid, Icon, Label } from "semantic-ui-react";
-// import FolderCard from "../components/FolderCard";
-
 
 class FolderDropdown extends Component {
   parsedDropdownOptions = () => {
@@ -21,7 +19,7 @@ class FolderDropdown extends Component {
     const { parsedDropdownOptions } = this;
     return (
       <>
-        <Grid.Row relaxed>
+        <Grid.Row relaxed="true">
           <Label color="teal">
             <Icon name="picture" size="big" /> Add pictures to folder
           </Label>

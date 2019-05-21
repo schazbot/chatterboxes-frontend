@@ -13,9 +13,9 @@ class Sentence extends React.Component {
           className="sentence-segment"
           color={"teal"}
           inverted
-          size={"medium"}
+          size={"large"}
         >
-          <Grid fluid celled grid container columns={8}>
+          <Grid fluid="true" celled container columns={8}>
             <Grid.Row>
               <Grid.Column>
                 <SayButton
@@ -31,16 +31,15 @@ class Sentence extends React.Component {
                 <Grid.Column>
                   <PictureCard
                     width={6}
-                    wrapped
-                    ui={false}
+                    wrapped={"false"}
                     key={picture.id}
                     handleClick={this.props.handleClick}
                     picture={picture}
                   />
                 </Grid.Column>
               ))}
-              <Grid.Column right floated>
-                <Button right floated onClick={this.props.clearSentence}>
+              <Grid.Column rightfloated="true">
+                <Button rightfloated="true" onClick={this.props.clearSentence}>
                   Clear
                 </Button>
               </Grid.Column>
