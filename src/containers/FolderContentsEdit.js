@@ -66,7 +66,7 @@ export default class FolderContents extends Component {
               onChange={this.handleFormChange}
               placeholder={this.props.folder.name}
             />
-            <Button onClick={this.editFolder} color={"red"}>
+            <Button onClick={this.editFolder} color={"green"}>
               Save
             </Button>
           </Form.Field>
