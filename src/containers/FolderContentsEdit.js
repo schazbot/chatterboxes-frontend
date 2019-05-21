@@ -31,7 +31,7 @@ export default class FolderContents extends Component {
       body: JSON.stringify({
         text: this.state.picture.text
       })
-    }).then(resp => resp.json());
+    }).then(resp => resp.json()).then(editedPic => this.props.editedPicToFolder(editedPic, this.props.selectedFolder.id));
   };
 
   deletePicture = () => {
