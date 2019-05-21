@@ -106,6 +106,7 @@ export default class App extends Component {
                     handleClick={this.addToSentence}
                     mySentence={this.state.mySentence}
                     resetSelectedFolder={this.resetSelectedFolder}
+                    removePicFromFolder={this.removePicFromFolder}
                   />
                 </>
               ) : (
@@ -167,6 +168,23 @@ export default class App extends Component {
       allMyFolders: [
         ...this.state.allMyFolders.filter(folder => folder.id !== folder_id),
         newReplacementFolder
+      ]
+    });
+  };
+
+  removePicFromFolder = picture => {
+    const folder_id = this.state.selectedFolder.id;
+    const folder = this.state.allMyFolders.find(
+      folder => folder.id === folder_id
+    );
+    const replacementFolder = {
+      ...folder, pictures: [...folder.pictures.filter(pic => pic.id !== picture.id)]
+    };
+
+    this.setState({
+      allMyFolders: [
+        ...this.state.allMyFolders.filter(folder => folder.id !== folder_id),
+        replacementFolder
       ]
     });
   };
