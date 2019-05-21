@@ -8,7 +8,7 @@ const PictureCardModal = props => {
     <Card key={picture.id} wrapped >
       <Card.Content>
         <Image src={picture.url} />
-        <Card.Description>{picture.text.toLowerCase()}</Card.Description>
+        <Card.Description>{picture.text}</Card.Description>
       </Card.Content>
 
       <Modal
