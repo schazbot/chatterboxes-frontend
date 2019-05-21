@@ -9,7 +9,7 @@ const FolderCard = props => {
       <Card.Content>
         <Image src={folder.image} />
 
-        <Card.Description textAlign={"center"}>{folder.name.toLowerCase()}</Card.Description>
+        <Card.Description textAlign={"center"}>{folder.name}</Card.Description>
       </Card.Content>
     </Card>
   );

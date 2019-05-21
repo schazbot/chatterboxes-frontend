@@ -22,9 +22,12 @@ class CreateContainer extends Component {
   };
 
   handlePictureSelection = value => {
-    this.setState({
-      selectedSearchResult: { text: value.name, url: value.image_url }
-    }, this.createPicture);
+    this.setState(
+      {
+        selectedSearchResult: { text: value.name, url: value.image_url }
+      },
+      this.createPicture
+    );
   };
 
   createPicture = () => {
@@ -36,11 +39,12 @@ class CreateContainer extends Component {
         text: this.state.selectedSearchResult.text,
         url: this.state.selectedSearchResult.url
       })
-    });
+    })
+      .then(resp => resp.json())
+      .then(newPicture => this.props.addPicToFolder(newPicture, this.state.folder_id));
   };
 
   handleOnSubmit = () => {
-    // e.preventDefault();
     this.handlePictureSelection();
   };
 

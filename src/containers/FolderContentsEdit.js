@@ -20,7 +20,7 @@ export default class FolderContents extends Component {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         name: this.state.folder.name
-      })
+      }).then(resp => resp.json())
     });
   };
 
@@ -31,13 +31,14 @@ export default class FolderContents extends Component {
       body: JSON.stringify({
         text: this.state.picture.text
       })
-    }).then(alert("Text saved!"));
+    }).then(resp => resp.json()).then(editedPic => this.props.editedPicToFolder(editedPic, this.props.selectedFolder.id));
   };
 
   deletePicture = () => {
     return fetch(EDIT_PICTURE_PATH + `${this.state.selectedPicture.id}`, {
       method: "DELETE"
-    }).then(alert("Picture deleted!"));
+    }).then(resp => resp.json())
+    .then(deletedPic =>this.props.removePicFromFolder(deletedPic))
   };
 
   handleFormChange = e => {
