@@ -37,7 +37,7 @@ class NewFolderForm extends Component {
     return (
       <Grid columns={1}>
         <Grid.Row>
-          <Label color="teal">
+          <Label >
             <Icon name="folder outline" size="big" /> Create new Folder
           </Label>
         </Grid.Row>

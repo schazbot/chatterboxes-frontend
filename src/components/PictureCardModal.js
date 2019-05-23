@@ -11,6 +11,10 @@ const PictureCardModal = props => {
     setModalOpen(false)
   }
 
+  const handleDelete = () => {
+    props.deletePicture()
+    setModalOpen(false)
+  }
   return (
     <Card key={picture.id} wrapped >
       <Card.Content>
@@ -48,7 +52,7 @@ const PictureCardModal = props => {
               Save
             </Button>
 
-            <Button onClick={props.deletePicture} color={"red"}>Delete</Button>
+            <Button onClick={handleDelete} color={"red"}>Delete</Button>
             <Label size={"big"}>Delete picture from folder</Label>
           </Form>
         </Modal.Content>

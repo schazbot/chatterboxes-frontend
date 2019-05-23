@@ -1,5 +1,5 @@
-.sentence-segment {
-  height: 12em;
+.long-segment {
+  min-height: 14em !important;
   background-color: lightcyan;
 }
 
@@ -27,5 +27,11 @@
     width: 100% !important
     }
 
-.folder-contents-container{
+
+.ui.card {
+  margin: 0em 0 !important;
+  margin-bottom:10px !important;
+}
+
+.folder-card{
 }

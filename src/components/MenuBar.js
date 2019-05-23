@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Menu, Icon } from "semantic-ui-react";
+import { Menu, Icon, Image } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 
 export default class MenuExampleBasic extends Component {
@@ -21,6 +21,17 @@ export default class MenuExampleBasic extends Component {
         >
           <Icon name="talk" />
           Home
+        </Menu.Item>
+
+        <Menu.Item
+          name="folders"
+          as={Link}
+          to="/folders"
+          active={activeItem === "folders"}
+          onClick={this.handleItemClick}
+        >
+          <Icon name="folder" />
+          My Folders
         </Menu.Item>
 
         <Menu.Item

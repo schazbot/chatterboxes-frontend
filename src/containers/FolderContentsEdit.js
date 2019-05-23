@@ -5,7 +5,7 @@ import { Grid, Button, Label, Form, Input, Icon } from "semantic-ui-react";
 const EDIT_FOLDER_PATH = "http://localhost:3002/api/v1/folders/";
 const EDIT_PICTURE_PATH = "http://localhost:3002/api/v1/pictures/";
 
-export default class FolderContents extends Component {
+export default class FolderContentsEdit extends Component {
   state = {
     selectedPicture: null,
     folder: { name: "" },
@@ -31,15 +31,17 @@ export default class FolderContents extends Component {
       body: JSON.stringify({
         text: this.state.picture.text
       })
-    }).then(resp => resp.json())
-    .then(editedPic => this.props.editedPicToFolder(editedPic))
+    })
+      .then(resp => resp.json())
+      .then(editedPic => this.props.updatePicture(editedPic));
   };
 
   deletePicture = () => {
     return fetch(EDIT_PICTURE_PATH + `${this.state.selectedPicture.id}`, {
       method: "DELETE"
-    }).then(resp => resp.json())
-    .then(deletedPic =>this.props.removePicFromFolder(deletedPic))
+    })
+      .then(resp => resp.json())
+      .then(deletedPic => this.props.deletePicture(deletedPic));
   };
 
   handleFormChange = e => {
@@ -56,59 +58,64 @@ export default class FolderContents extends Component {
     this.setState({ selectedPicture: selectedPicture });
   };
 
-  resetPicture = () => {
-    this.setState({
-      selectedPicture: null
-    })
-  }
+ 
 
   render() {
     return (
       <Grid container celled className="folder-contents-container">
-        <Grid.Row>
-        <Form>
-        <Label size={"big"}>
-        <Icon name="edit outline" /> Edit folder name
-          </Label>
-          <Form.Field>
-          
-            <Input
-            size='small' 
-              onChange={this.handleFormChange}
-              placeholder={this.props.folder.name}
-            />   
-              <Button onClick={this.editFolder} color={"green"}>
-              Save
-            </Button>
-          </Form.Field>
-          
-        </Form>
-        </Grid.Row>
-
-
-        <Grid relaxed  container columns={6} textAlign={"center"}>
-        <Label align right  size={"massive"}>
-        <Icon name="edit outline" />Choose a picture to edit
-        <Icon name="folder outline" />
-        </Label>
+        <Grid.Column width={4}>
           <Grid.Row>
-            {this.props.folder.pictures.map(picture => (
-              <Grid.Column key={picture.id}>
-                <PictureCardModal
-                  className="container-cell "
-                  key={picture.id}
-                  picture={picture}
-                  setPicture={this.setPicture}
-                  editPicture={this.editPicture}
-                  editedPicToFolder={this.props.editedPicToFolder}
-                  deletePicture={this.deletePicture}
-                  handlePictureFormChange={this.handlePictureFormChange}
+            <Form>
+              <Label size={"big"}>
+                <Icon name="edit outline" />
+                Edit folder name
+              </Label>
+              <Form.Field>
+                <Input
+                  size="small"
+                  onChange={this.handleFormChange}
+                  placeholder={this.props.folder.name}
                 />
-              </Grid.Column>
-            ))}
+                <Button onClick={this.editFolder} color={"green"}>
+                <Icon name="save" />Save
+                </Button>
+              </Form.Field>
+            </Form>
           </Grid.Row>
-          <Button onClick={this.props.resetSelectedFolder}>Back</Button>
-        </Grid>
+        </Grid.Column>
+        <Grid.Column width={9}>
+          <Grid padded container columns={4} textAlign={"center"}>
+            <Label size={"massive"}>
+              <Icon name="edit outline" />
+              Choose a picture to edit
+            </Label>
+            <Grid.Row>
+              {this.props.folder.pictures.map(picture => (
+                <Grid.Column key={picture.id}>
+                  <PictureCardModal
+                    className="container-cell "
+                    key={picture.id}
+                    picture={picture}
+                    setPicture={this.setPicture}
+                    editPicture={this.editPicture}
+                    editedPicToFolder={this.props.editedPicToFolder}
+                    deletePicture={this.deletePicture}
+                    handlePictureFormChange={this.handlePictureFormChange}
+                  />
+                </Grid.Column>
+              ))}
+            </Grid.Row>
+
+            <Button onClick={this.props.resetSelectedFolder}>Back</Button>
+          </Grid>
+        </Grid.Column>
+              <Grid.Column width={3}>
+                <Label size={"big"}>
+                  <Icon name="trash" />
+                  Delete folder
+                </Label>
+                <Button color={"red"}> <Icon name="trash" />Delete</Button>
+              </Grid.Column>
       </Grid>
     );
   }
