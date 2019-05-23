@@ -35,9 +35,20 @@ export default class App extends Component {
       );
   };
 
+  updatePicture = picture => {
+    const { selectedFolder, allMyFolders } = this.state
+
+    const updatedPictures = selectedFolder.pictures.map(p => p.id === picture.id ? picture : p)
+    const updatedFolder = {...selectedFolder, pictures: updatedPictures}
+    this.setState({
+      selectedFolder: updatedFolder,
+      allMyFolders: allMyFolders.map(f => f.id === selectedFolder.id ? updatedFolder : f)
+    })
+  }
+
   render() {
     return (
-      <div>
+      <div className="app-container">
         <MenuBar />
 
         <Route
@@ -45,20 +56,27 @@ export default class App extends Component {
           path="/home"
           render={() => {
             return (
-              <div>
+              <div >
+
+                <Grid className="home-container" container>
+                <Grid.Row >
+
                 <Sentence
                   mySentence={this.state.mySentence}
                   handleClick={this.removeFromSentence}
                   clearSentence={this.clearSentence}
                 />
+                </Grid.Row>
                 {this.state.selectedFolder ? (
                   <>
+                  <Grid.Row>
                     <FolderContents
                       folder={this.state.selectedFolder}
                       handleClick={this.addToSentence}
                       mySentence={this.state.mySentence}
                       resetSelectedFolder={this.resetSelectedFolder}
                     />
+                  </Grid.Row>
                   </>
                 ) : (
                   <>
@@ -77,6 +95,7 @@ export default class App extends Component {
                     </Grid>
                   </>
                 )}
+                </Grid>
               </div>
             );
           }}
@@ -107,7 +126,7 @@ export default class App extends Component {
                     mySentence={this.state.mySentence}
                     resetSelectedFolder={this.resetSelectedFolder}
                     removePicFromFolder={this.removePicFromFolder}
-                    editedPicToFolder={this.editedPicToFolder}
+                    editedPicToFolder={this.updatePicture}
                     selectedFolder={this.state.selectedFolder}
                   />
                 </>
@@ -173,9 +192,10 @@ export default class App extends Component {
       ]
     });
   };
-  editedPicToFolder = (editedPicture, folder_id) => {
+
+  editedPicToFolder = (editedPicture, folderId) => {
     const replacementFolder = this.state.allMyFolders.find(
-      folder => folder.id === folder_id
+      folder => folder.id === folderId
     );
 
     const newReplacementFolder = {
@@ -184,7 +204,7 @@ export default class App extends Component {
     };
     this.setState({
       allMyFolders: [
-        ...this.state.allMyFolders.filter(folder => folder.id !== folder_id),
+        ...this.state.allMyFolders.filter(folder => folder.id !== folderId),
         newReplacementFolder
       ]
     });
