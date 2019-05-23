@@ -1,22 +1,31 @@
 import React, { useState } from "react";
-import { Card, Button, Image, Form, Modal, Label } from "semantic-ui-react";
+import {
+  Card,
+  Button,
+  Image,
+  Form,
+  Modal,
+  Label,
+  Icon
+} from "semantic-ui-react";
 
 const PictureCardModal = props => {
   const { picture } = props;
 
-  const [modalOpen, setModalOpen] = useState(false)
+  const [modalOpen, setModalOpen] = useState(false);
 
   const handleEditSave = () => {
-    props.editPicture()
-    setModalOpen(false)
-  }
+    props.editPicture();
+    setModalOpen(false);
+  };
 
   const handleDelete = () => {
-    props.deletePicture()
-    setModalOpen(false)
-  }
+    props.deletePicture();
+    setModalOpen(false);
+  };
+  
   return (
-    <Card key={picture.id} wrapped >
+    <Card key={picture.id} wrapped>
       <Card.Content>
         <Image src={picture.url} />
         <Card.Description>{picture.text}</Card.Description>
@@ -29,15 +38,16 @@ const PictureCardModal = props => {
           <Button
             onClick={() => {
               props.setPicture(picture);
-              setModalOpen(true)
+              setModalOpen(true);
             }}
             color={"blue"}
           >
+            <Icon name="edit" />
             Edit
           </Button>
         }
       >
-        <Modal.Header>Edit Text</Modal.Header>
+        <Modal.Header><Icon name="edit" />Edit Text</Modal.Header>
         <Modal.Content image>
           <Image wrapped size="medium" src={picture.url} />
           <Form>
@@ -51,10 +61,15 @@ const PictureCardModal = props => {
             <Button onClick={handleEditSave} color={"green"}>
               Save
             </Button>
-
-            <Button onClick={handleDelete} color={"red"}>Delete</Button>
-            <Label size={"big"}>Delete picture from folder</Label>
           </Form>
+        </Modal.Content>
+        <Modal.Content>
+          <Button float right onClick={handleDelete} color={"red"}>
+            Delete
+          </Button>
+          <Label pointing={"left"} size={"big"}>
+            Delete picture from folder
+          </Label>
         </Modal.Content>
       </Modal>
     </Card>

@@ -20,8 +20,8 @@ export default class FolderContentsEdit extends Component {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         name: this.state.folder.name
-      }).then(resp => resp.json())
-    });
+      })
+    }).then(resp => resp.json());
   };
 
   editPicture = () => {
@@ -75,7 +75,7 @@ export default class FolderContentsEdit extends Component {
         <Grid.Column width={4}>
           <Grid.Row>
             <Form>
-              <Label size={"big"}>
+              <Label pointing={"below"} size={"big"}>
                 <Icon name="edit outline" />
                 Edit folder name
               </Label>
@@ -115,11 +115,11 @@ export default class FolderContentsEdit extends Component {
               ))}
             </Grid.Row>
 
-            <Button onClick={this.props.resetSelectedFolder}>Back</Button>
+            <Button onClick={this.props.resetSelectedFolder}><Icon name="backward" />Back</Button>
           </Grid>
         </Grid.Column>
               <Grid.Column width={3}>
-                <Label size={"big"}>
+                <Label pointing={"below"}size={"big"}>
                   <Icon name="trash" />
                   Delete folder
                 </Label>
