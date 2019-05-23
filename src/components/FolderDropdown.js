@@ -20,7 +20,7 @@ class FolderDropdown extends Component {
     return (
       <>
         <Grid.Row relaxed="true">
-          <Label color="teal">
+          <Label >
             <Icon name="picture" size="big" /> Add pictures to folder
           </Label>
         </Grid.Row>

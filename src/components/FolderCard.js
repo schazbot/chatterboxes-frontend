@@ -5,7 +5,7 @@ const FolderCard = props => {
   const { folder } = props;
 
   return (
-    <Card color='black' onClick={() => props.handleClick(folder)} wrapped={"false"}>
+    <Card className="folder-card" color='black' onClick={() => props.handleClick(folder)} >
       <Card.Content>
         <Image src={folder.image} />
 
