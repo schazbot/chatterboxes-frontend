@@ -1,25 +1,19 @@
-import React, { Component } from "react";
+import React from "react";
 import { Card, Image } from "semantic-ui-react";
 
+const PictureCard = props => {
+  const { picture } = props;
 
-class PictureCard extends Component {
-  render() {
-    return (
-      <div>
-        <Card>
-          <Image
-            src={this.props.picture.image_url}
-            wrapped
-            ui={false}
-          />
-          <Card.Content>
-            <Card.Header>{this.props.picture.name.toLowerCase()}</Card.Header>
-          </Card.Content>
-        </Card>
-     
-      </div>
-    );
-  }
-}
+  return (
+    <Card key={props.picture.id} onClick={() => props.handleClick(picture)}wrapped={"false"}>
+    <Card.Content>
+      <Image src={props.picture.url} />
+      <Card.Description>
+        {props.picture.text}
+      </Card.Description>
+      </Card.Content>
+    </Card>
+  );
+};
 
 export default PictureCard;

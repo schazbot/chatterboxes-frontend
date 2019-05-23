@@ -1,24 +1,52 @@
 import React from "react";
 import PictureCard from "../components/PictureCard";
+import "font-awesome/css/font-awesome.min.css";
+import "../App.css";
 import { SayButton } from "react-say";
+import { Grid, Segment, Button } from "semantic-ui-react";
 
 class Sentence extends React.Component {
-
   render() {
     return (
-      <div>
-        <div>
-            {this.props.allMyPictures.map(picture => <PictureCard  picture={picture}/>)}
-          <SayButton
-            onClick={event => console.log(event)}
-            speak={this.props.allMyPictures.map(picture => picture.name)}
-          >
-            Speak
-          </SayButton>
-
-          
-        </div>
-      </div>
+      <>
+        <Segment
+          className="sentence-segment"
+          color={"teal"}
+          inverted
+          size={"large"}
+        >
+          <Grid fluid="true" celled container columns={8}>
+            <Grid.Row>
+              <Grid.Column>
+                <SayButton
+                  className="speak-btn"
+                  onClick={event => console.log(event)}
+                  speak={this.props.mySentence.map(picture => picture.text)}
+                >
+                  <i className="fa fa-volume-up fa-7x" size="" />
+                  Speak
+                </SayButton>
+              </Grid.Column>
+              {this.props.mySentence.map(picture => (
+                <Grid.Column>
+                  <PictureCard
+                    width={6}
+                    wrapped={"false"}
+                    key={picture.id}
+                    handleClick={this.props.handleClick}
+                    picture={picture}
+                  />
+                </Grid.Column>
+              ))}
+              <Grid.Column rightfloated="true">
+                <Button rightfloated="true" onClick={this.props.clearSentence}>
+                  Clear
+                </Button>
+              </Grid.Column>
+            </Grid.Row>
+          </Grid>
+        </Segment>
+      </>
     );
   }
 }
