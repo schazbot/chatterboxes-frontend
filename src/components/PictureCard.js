@@ -8,6 +8,7 @@ const PictureCard = props => {
     <Card key={props.picture.id} onClick={() => props.handleClick(picture)}wrapped={"false"}>
     <Card.Content>
       <Image src={props.picture.url} />
+      
       <Card.Description>
         {props.picture.text}
       </Card.Description>

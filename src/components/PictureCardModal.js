@@ -1,8 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { Card, Button, Image, Form, Modal, Label } from "semantic-ui-react";
 
 const PictureCardModal = props => {
   const { picture } = props;
+
+  const [modalOpen, setModalOpen] = useState(false)
+
+  const handleEditSave = () => {
+    props.editPicture()
+    setModalOpen(false)
+  }
 
   return (
     <Card key={picture.id} wrapped >
@@ -12,11 +19,13 @@ const PictureCardModal = props => {
       </Card.Content>
 
       <Modal
+        open={modalOpen}
         size={"small"}
         trigger={
           <Button
             onClick={() => {
               props.setPicture(picture);
+              setModalOpen(true)
             }}
             color={"blue"}
           >
@@ -35,7 +44,7 @@ const PictureCardModal = props => {
                 placeholder={picture.text}
               />
             </Form.Field>
-            <Button onClick={props.editPicture} color={"green"}>
+            <Button onClick={handleEditSave} color={"green"}>
               Save
             </Button>
 
