@@ -9,8 +9,6 @@ import CreateContainer from "./containers/CreateContainer";
 import Sentence from "./containers/Sentence";
 import FolderCard from "./components/FolderCard";
 import FolderContents from "./containers/FolderContents";
-import FolderContentsHome from "./containers/FolderContentsHome";
-
 import FolderContentsEdit from "./containers/FolderContentsEdit";
 
 const USER_URL = "http://localhost:3002/api/v1/users/1";
@@ -137,12 +135,11 @@ export default class App extends Component {
                     <>
                       <FolderContentsEdit
                         folder={this.state.selectedFolder}
-                        handleClick={this.addToSentence}
-                        mySentence={this.state.mySentence}
                         resetSelectedFolder={this.resetSelectedFolder}
                         deletePicture={this.deletePicture}
                         updatePicture={this.updatePicture}
                         selectedFolder={this.state.selectedFolder}
+                        deleteFolder={this.deleteFolder}
                       />
                     </>
                   ) : (
@@ -198,7 +195,6 @@ export default class App extends Component {
     const replacementFolder = this.state.allMyFolders.find(
       folder => folder.id === folder_id
     );
-
     const newReplacementFolder = {
       ...replacementFolder,
       pictures: [...replacementFolder.pictures, newPicture]
@@ -211,45 +207,6 @@ export default class App extends Component {
     });
   };
 
-  // editedPicToFolder = (editedPicture, folderId) => {
-  //   const replacementFolder = this.state.allMyFolders.find(
-  //     folder => folder.id === folderId
-  //   );
-
-  //   const newReplacementFolder = {
-  //     ...replacementFolder,
-  //     pictures: [
-  //       ...replacementFolder.pictures.filter(
-  //         picture => picture.id !== editedPicture.id
-  //       ),
-  //       editedPicture
-  //     ]
-  //   };
-  //   this.setState({
-  //     allMyFolders: [
-  //       ...this.state.allMyFolders.filter(folder => folder.id !== folderId),
-  //       newReplacementFolder
-  //     ]
-  //   });
-  // };
-
-  // removePicFromFolder = picture => {
-  //   const folder_id = this.state.selectedFolder.id;
-  //   const folder = this.state.allMyFolders.find(
-  //     folder => folder.id === folder_id
-  //   );
-  //   const replacementFolder = {
-  //     ...folder,
-  //     pictures: [...folder.pictures.filter(pic => pic.id !== picture.id)]
-  //   };
-
-  //   this.setState({
-  //     allMyFolders: [
-  //       ...this.state.allMyFolders.filter(folder => folder.id !== folder_id),
-  //       replacementFolder
-  //     ]
-  //   });
-  // };
 
   deletePicture = picture => {
     const { selectedFolder, allMyFolders } = this.state;
@@ -279,6 +236,16 @@ export default class App extends Component {
         f.id === selectedFolder.id ? updatedFolder : f
       )
     });
+  };
+
+  deleteFolder = folder => {
+    const { allMyFolders } = this.state;
+
+    const updatedFolders = allMyFolders.filter(
+      f => f.id !== folder.id
+    );
+    this.setState({
+      allMyFolders: updatedFolders})
   };
 
   setFolder = selectedFolder => {

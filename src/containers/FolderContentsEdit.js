@@ -36,6 +36,15 @@ export default class FolderContentsEdit extends Component {
       .then(editedPic => this.props.updatePicture(editedPic));
   };
 
+
+  deleteFolderFromApi = () => {
+    return fetch(EDIT_FOLDER_PATH + `${this.props.selectedFolder.id}`, {
+      method: "DELETE"
+    })
+      .then(resp => resp.json())
+      .then(deletedFolder => this.props.deleteFolder(deletedFolder));
+  };
+
   deletePicture = () => {
     return fetch(EDIT_PICTURE_PATH + `${this.state.selectedPicture.id}`, {
       method: "DELETE"
@@ -114,7 +123,7 @@ export default class FolderContentsEdit extends Component {
                   <Icon name="trash" />
                   Delete folder
                 </Label>
-                <Button color={"red"}> <Icon name="trash" />Delete</Button>
+                <Button onClick={this.deleteFolderFromApi}color={"red"}> <Icon name="trash" />Delete</Button>
               </Grid.Column>
       </Grid>
     );
