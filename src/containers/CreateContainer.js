@@ -88,17 +88,13 @@ class CreateContainer extends Component {
           </Grid.Column>
 
           <Grid.Column >
-            <Grid.Row>
               <FolderDropdown
                 folderId={this.state.folder_id}
                 allMyFolders={this.props.allMyFolders}
                 handleFolderSelectionChange={this.handleFolderSelectionChange}
               />
-            </Grid.Row>
-
-            <Grid.Row >
+              <Grid.Row>
               <SearchComponent
-                className="search-api-bar"
                 createPicture={this.createPicture}
                 searchTerm={this.state.searchTerm}
                 searchResults={this.state.searchResults}
@@ -106,7 +102,7 @@ class CreateContainer extends Component {
                 handleOnSubmit={this.handleOnSubmit}
                 handlePictureSelection={this.handlePictureSelection}
               />
-            </Grid.Row>
+              </Grid.Row>  
           </Grid.Column>
         </Grid.Row>
 

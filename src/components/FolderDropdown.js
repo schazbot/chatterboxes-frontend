@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import SearchComponent from "../components/SearchComponent"
 import { Dropdown, Grid, Icon, Label } from "semantic-ui-react";
 
 class FolderDropdown extends Component {
@@ -24,7 +25,7 @@ class FolderDropdown extends Component {
               <Icon name="picture" size="big" /> Add pictures to folder
             </Label>
           </Grid.Row>
-          <Grid.Row relaxed="true">
+          <Grid.Row>
             <Dropdown
               placeholder="Select Folder"
               selection
@@ -32,6 +33,8 @@ class FolderDropdown extends Component {
               onChange={this.props.handleFolderSelectionChange}
             />
           </Grid.Row>
+
+
         </Grid>
       </>
     );
