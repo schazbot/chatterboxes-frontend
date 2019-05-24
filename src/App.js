@@ -52,12 +52,7 @@ export default class App extends Component {
                   />
                 </Grid.Row>
                 <Grid.Row>
-                  {/* <FolderContentsHome
-                    folder={greetingFolder}
-                    handleClick={this.addToSentence}
-                    mySentence={this.state.mySentence}
-                    resetSelectedFolder={this.resetSelectedFolder}
-                  /> */}
+              
                 </Grid.Row>
               </Grid>
             </>
@@ -69,45 +64,43 @@ export default class App extends Component {
           path="/folders"
           render={() => {
             return (
-              <div>
-                <Grid className="folder-container" container>
-                  <Grid.Row>
-                    <Sentence
-                      mySentence={this.state.mySentence}
-                      handleClick={this.removeFromSentence}
-                      clearSentence={this.clearSentence}
-                    />
-                  </Grid.Row>
-                  {this.state.selectedFolder ? (
-                    <>
+              <Grid className="folder-container" container>
+                <Grid.Row>
+                  <Sentence
+                    mySentence={this.state.mySentence}
+                    handleClick={this.removeFromSentence}
+                    clearSentence={this.clearSentence}
+                  />
+                </Grid.Row>
+                {this.state.selectedFolder ? (
+                  <>
+                    <Grid.Row>
+                      <FolderContents
+                        folder={this.state.selectedFolder}
+                        handleClick={this.addToSentence}
+                        mySentence={this.state.mySentence}
+                        resetSelectedFolder={this.resetSelectedFolder}
+                      />
+                    </Grid.Row>
+                  </>
+                ) : (
+                  <>
+                    <Grid container columns={6}>
                       <Grid.Row>
-                        <FolderContents
-                          folder={this.state.selectedFolder}
-                          handleClick={this.addToSentence}
-                          mySentence={this.state.mySentence}
-                          resetSelectedFolder={this.resetSelectedFolder}
-                        />
+                        {this.state.allMyFolders.map(folder => (
+                          <Grid.Column key={folder.name}>
+                            <FolderCard
+                              key={folder.id}
+                              folder={folder}
+                              handleClick={this.setFolder}
+                            />
+                          </Grid.Column>
+                        ))}
                       </Grid.Row>
-                    </>
-                  ) : (
-                    <>
-                      <Grid container columns={6}>
-                        <Grid.Row>
-                          {this.state.allMyFolders.map(folder => (
-                            <Grid.Column key={folder.name}>
-                              <FolderCard
-                                key={folder.id}
-                                folder={folder}
-                                handleClick={this.setFolder}
-                              />
-                            </Grid.Column>
-                          ))}
-                        </Grid.Row>
-                      </Grid>
-                    </>
-                  )}
-                </Grid>
-              </div>
+                    </Grid>
+                  </>
+                )}
+              </Grid>
             );
           }}
         />
@@ -120,6 +113,7 @@ export default class App extends Component {
                 getMyPics={this.getMyPics}
                 allMyFolders={this.state.allMyFolders}
                 addPicToFolder={this.addPicToFolder}
+                updateFolders={this.updateFolders}
               />
             </>
           )}
@@ -207,6 +201,12 @@ export default class App extends Component {
     });
   };
 
+  updateFolders = newFolder => {
+    debugger
+    this.setState({
+      allMyFolders: [...this.state.allMyFolders, newFolder]
+    });
+  };
 
   deletePicture = picture => {
     const { selectedFolder, allMyFolders } = this.state;
@@ -241,11 +241,11 @@ export default class App extends Component {
   deleteFolder = folder => {
     const { allMyFolders } = this.state;
 
-    const updatedFolders = allMyFolders.filter(
-      f => f.id !== folder.id
-    );
+    const updatedFolders = allMyFolders.filter(f => f.id !== folder.id);
     this.setState({
-      allMyFolders: updatedFolders})
+      allMyFolders: updatedFolders
+    });
+    this.resetSelectedFolder();
   };
 
   setFolder = selectedFolder => {

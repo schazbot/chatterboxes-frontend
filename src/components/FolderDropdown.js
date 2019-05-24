@@ -9,32 +9,30 @@ class FolderDropdown extends Component {
         id: folder.id,
         text: folder.name,
         value: folder.id,
-        image: folder.image
+        image: { avatar: true, src: folder.image_url }
       };
     });
   };
-
 
   render() {
     const { parsedDropdownOptions } = this;
     return (
       <>
+      <Grid>
         <Grid.Row relaxed="true">
-          <Label >
-            <Icon name="picture" size="big" /> Add pictures to folder
+          <Label pointing={"right"}>
+            <Icon name="picture" size="big" /> Add pictures
+            to folder
           </Label>
-        </Grid.Row>
-        <Grid.Row>
-          <Dropdown
+         <Dropdown
             placeholder="Select Folder"
             selection
-            text="Choose a folder"
-            options={parsedDropdownOptions()}
             
+            options={parsedDropdownOptions()}
             onChange={this.props.handleFolderSelectionChange}
           />
-       
         </Grid.Row>
+        </Grid>
       </>
     );
   }

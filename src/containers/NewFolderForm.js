@@ -16,10 +16,9 @@ class NewFolderForm extends Component {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(this.state)
     })
-      .then(resp => {
-        resp.json();
-      })
-      .then(this.resetFormState);
+      .then(resp => resp.json())
+      .then(newFolder => this.props.updateFolders(newFolder)
+      )
   };
 
   resetFormState = () => {
@@ -37,7 +36,7 @@ class NewFolderForm extends Component {
     return (
       <Grid columns={1}>
         <Grid.Row>
-          <Label >
+          <Label>
             <Icon name="folder outline" size="big" /> Create new Folder
           </Label>
         </Grid.Row>
@@ -56,7 +55,7 @@ class NewFolderForm extends Component {
             <Form.Field inline>
               <input
                 type="text"
-                id="image_url"
+                id="image"
                 onChange={event => this.handleUrlChange(event)}
                 placeholder="Add image url"
                 value={this.state.image_url}

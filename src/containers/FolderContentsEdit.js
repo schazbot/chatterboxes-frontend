@@ -14,14 +14,12 @@ export default class FolderContentsEdit extends Component {
     }
   };
 
-  editFolder = () => {
-    return fetch(EDIT_FOLDER_PATH + `${this.props.folder.id}`, {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        name: this.state.folder.name
-      })
-    }).then(resp => resp.json());
+  deletePicture = () => {
+    return fetch(EDIT_PICTURE_PATH + `${this.state.selectedPicture.id}`, {
+      method: "DELETE"
+    })
+      .then(resp => resp.json())
+      .then(deletedPic => this.props.deletePicture(deletedPic));
   };
 
   editPicture = () => {
@@ -36,6 +34,9 @@ export default class FolderContentsEdit extends Component {
       .then(editedPic => this.props.updatePicture(editedPic));
   };
 
+  setPicture = selectedPicture => {
+    this.setState({ selectedPicture: selectedPicture });
+  };
 
   deleteFolderFromApi = () => {
     return fetch(EDIT_FOLDER_PATH + `${this.props.selectedFolder.id}`, {
@@ -45,12 +46,14 @@ export default class FolderContentsEdit extends Component {
       .then(deletedFolder => this.props.deleteFolder(deletedFolder));
   };
 
-  deletePicture = () => {
-    return fetch(EDIT_PICTURE_PATH + `${this.state.selectedPicture.id}`, {
-      method: "DELETE"
-    })
-      .then(resp => resp.json())
-      .then(deletedPic => this.props.deletePicture(deletedPic));
+  editFolder = () => {
+    return fetch(EDIT_FOLDER_PATH + `${this.props.folder.id}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        name: this.state.folder.name
+      })
+    }).then(resp => resp.json());
   };
 
   handleFormChange = e => {
@@ -62,12 +65,6 @@ export default class FolderContentsEdit extends Component {
     const { value } = e.target;
     this.setState({ picture: { text: value } });
   };
-
-  setPicture = selectedPicture => {
-    this.setState({ selectedPicture: selectedPicture });
-  };
-
- 
 
   render() {
     return (
@@ -86,7 +83,8 @@ export default class FolderContentsEdit extends Component {
                   placeholder={this.props.folder.name}
                 />
                 <Button onClick={this.editFolder} color={"green"}>
-                <Icon name="save" />Save
+                  <Icon name="save" />
+                  Save
                 </Button>
               </Form.Field>
             </Form>
@@ -99,7 +97,7 @@ export default class FolderContentsEdit extends Component {
               Choose a picture to edit
             </Label>
             <Grid.Row>
-              {this.props.folder.pictures.map(picture => (
+              {this.props.folder.pictures ? (this.props.folder.pictures.map(picture => (
                 <Grid.Column key={picture.id}>
                   <PictureCardModal
                     className="container-cell "
@@ -112,19 +110,26 @@ export default class FolderContentsEdit extends Component {
                     handlePictureFormChange={this.handlePictureFormChange}
                   />
                 </Grid.Column>
-              ))}
+              ))) : null}
             </Grid.Row>
 
-            <Button onClick={this.props.resetSelectedFolder}><Icon name="backward" />Back</Button>
+            <Button onClick={this.props.resetSelectedFolder}>
+              <Icon name="backward" />
+              Back
+            </Button>
           </Grid>
         </Grid.Column>
-              <Grid.Column width={3}>
-                <Label pointing={"below"}size={"big"}>
-                  <Icon name="trash" />
-                  Delete folder
-                </Label>
-                <Button onClick={this.deleteFolderFromApi}color={"red"}> <Icon name="trash" />Delete</Button>
-              </Grid.Column>
+        <Grid.Column width={3}>
+          <Label pointing={"below"} size={"big"}>
+            <Icon name="trash" />
+            Delete folder
+          </Label>
+          <Button onClick={this.deleteFolderFromApi} color={"red"}>
+            {" "}
+            <Icon name="trash" />
+            Delete
+          </Button>
+        </Grid.Column>
       </Grid>
     );
   }

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import {Search} from "semantic-ui-react"
 
 export default class SearchComponent extends Component {
   render() {
@@ -7,11 +8,14 @@ export default class SearchComponent extends Component {
         <form className="ui search">
           <input
             type="text"
-            className="search-box"
             placeholder="Search for..."
             onChange={this.props.handleSearchQuery}
           />
         </form>
+
+        {/* <Search type="text"
+            placeholder="Search for..."
+            onChange={this.props.handleSearchQuery}/> */}
       </>
     );
   }

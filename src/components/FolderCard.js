@@ -7,7 +7,7 @@ const FolderCard = props => {
   return (
     <Card className="folder-card" color='black' onClick={() => props.handleClick(folder)} >
       <Card.Content>
-        <Image src={folder.image} />
+        <Image src={folder.image_url} />
 
         <Card.Description textAlign={"center"}>{folder.name}</Card.Description>
       </Card.Content>
