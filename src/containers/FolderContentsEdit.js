@@ -53,7 +53,7 @@ export default class FolderContentsEdit extends Component {
       body: JSON.stringify({
         name: this.state.folder.name
       })
-    }).then(resp => resp.json());
+    }).then(resp => resp.json()).then(editedFolder => this.props.updateFolder(editedFolder));
   };
 
   handleFormChange = e => {
@@ -62,6 +62,7 @@ export default class FolderContentsEdit extends Component {
   };
 
   handlePictureFormChange = e => {
+    debugger
     const { value } = e.target;
     this.setState({ picture: { text: value } });
   };

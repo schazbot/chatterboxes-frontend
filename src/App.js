@@ -114,6 +114,7 @@ export default class App extends Component {
                         updatePicture={this.updatePicture}
                         selectedFolder={this.state.selectedFolder}
                         deleteFolder={this.deleteFolder}
+                        updateFolder={this.updateFolder}
                       />
                     </>
                   ) : (
@@ -166,12 +167,11 @@ export default class App extends Component {
   };
 
   addPicToFolder = (newPicture, folder_id) => {
+    debugger
     const replacementFolder = this.state.allMyFolders.find(
       folder => folder.id === folder_id
     );
-    debugger
     const newReplacementFolder = {
-    
       ...replacementFolder,
       pictures: [...replacementFolder.pictures, newPicture]
     };
@@ -187,6 +187,16 @@ export default class App extends Component {
     debugger
     this.setState({
       allMyFolders: [...this.state.allMyFolders, newFolder]
+    });
+  };
+
+  updateFolder = updatedFolder => {
+    const { selectedFolder, allMyFolders } = this.state;
+
+    this.setState({
+      allMyFolders: allMyFolders.map(f =>
+        f.id === selectedFolder.id ? updatedFolder : f
+      )
     });
   };
 
