@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import SearchComponent from "../components/SearchComponent"
 import { Dropdown, Grid, Icon, Label } from "semantic-ui-react";
 
 class FolderDropdown extends Component {
@@ -9,32 +10,32 @@ class FolderDropdown extends Component {
         id: folder.id,
         text: folder.name,
         value: folder.id,
-        image: folder.image
+        image: { avatar: true, src: folder.image_url }
       };
     });
   };
-
 
   render() {
     const { parsedDropdownOptions } = this;
     return (
       <>
-        <Grid.Row relaxed="true">
-          <Label >
-            <Icon name="picture" size="big" /> Add pictures to folder
-          </Label>
-        </Grid.Row>
-        <Grid.Row>
-          <Dropdown
-            placeholder="Select Folder"
-            selection
-            text="Choose a folder"
-            options={parsedDropdownOptions()}
-            
-            onChange={this.props.handleFolderSelectionChange}
-          />
-       
-        </Grid.Row>
+        <Grid>
+          <Grid.Row>
+            <Label pointing={"below"}>
+              <Icon name="picture" size="big" /> Add pictures to folder
+            </Label>
+          </Grid.Row>
+          <Grid.Row>
+            <Dropdown
+              placeholder="Select Folder"
+              selection
+              options={parsedDropdownOptions()}
+              onChange={this.props.handleFolderSelectionChange}
+            />
+          </Grid.Row>
+
+
+        </Grid>
       </>
     );
   }

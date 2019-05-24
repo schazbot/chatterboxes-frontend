@@ -1,17 +1,21 @@
 import React, { Component } from "react";
+import { Icon, Grid } from "semantic-ui-react";
 
 export default class SearchComponent extends Component {
   render() {
     return (
       <>
-        <form className="ui search">
+        <Grid>
+        <Grid.Row >
           <input
+            className="search-api-bar"
             type="text"
-            className="search-box"
             placeholder="Search for..."
             onChange={this.props.handleSearchQuery}
           />
-        </form>
+          <Icon color={"grey"} name="search" size="big" />
+          </Grid.Row>
+          </Grid>
       </>
     );
   }

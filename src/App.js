@@ -37,13 +37,14 @@ export default class App extends Component {
   render() {
     return (
       <div className="app-container">
-        <MenuBar />
+        <MenuBar resetSelectedFolder={this.resetSelectedFolder}
+        selectedFolder={this.state.selectedFolder}/>
         <Route
           exact
-          path="/home"
-          render={() => (
-            <>
-              <Grid container>
+          path="/folders"
+          render={() => {
+            return (
+              <Grid className="folder-container" container>
                 <Grid.Row>
                   <Sentence
                     mySentence={this.state.mySentence}
@@ -51,63 +52,35 @@ export default class App extends Component {
                     clearSentence={this.clearSentence}
                   />
                 </Grid.Row>
-                <Grid.Row>
-                  {/* <FolderContentsHome
-                    folder={greetingFolder}
-                    handleClick={this.addToSentence}
-                    mySentence={this.state.mySentence}
-                    resetSelectedFolder={this.resetSelectedFolder}
-                  /> */}
-                </Grid.Row>
-              </Grid>
-            </>
-          )}
-        />
-
-        <Route
-          exact
-          path="/folders"
-          render={() => {
-            return (
-              <div>
-                <Grid className="folder-container" container>
-                  <Grid.Row>
-                    <Sentence
-                      mySentence={this.state.mySentence}
-                      handleClick={this.removeFromSentence}
-                      clearSentence={this.clearSentence}
-                    />
-                  </Grid.Row>
-                  {this.state.selectedFolder ? (
-                    <>
+                {this.state.selectedFolder ? (
+                  <>
+                    <Grid.Row>
+                      <FolderContents
+                        folder={this.state.selectedFolder}
+                        handleClick={this.addToSentence}
+                        mySentence={this.state.mySentence}
+                        resetSelectedFolder={this.resetSelectedFolder}
+                      />
+                    </Grid.Row>
+                  </>
+                ) : (
+                  <>
+                    <Grid container doubling columns={8}>
                       <Grid.Row>
-                        <FolderContents
-                          folder={this.state.selectedFolder}
-                          handleClick={this.addToSentence}
-                          mySentence={this.state.mySentence}
-                          resetSelectedFolder={this.resetSelectedFolder}
-                        />
+                        {this.state.allMyFolders.map(folder => (
+                          <Grid.Column key={folder.name}>
+                            <FolderCard
+                              key={folder.id}
+                              folder={folder}
+                              handleClick={this.setFolder}
+                            />
+                          </Grid.Column>
+                        ))}
                       </Grid.Row>
-                    </>
-                  ) : (
-                    <>
-                      <Grid container columns={6}>
-                        <Grid.Row>
-                          {this.state.allMyFolders.map(folder => (
-                            <Grid.Column key={folder.name}>
-                              <FolderCard
-                                key={folder.id}
-                                folder={folder}
-                                handleClick={this.setFolder}
-                              />
-                            </Grid.Column>
-                          ))}
-                        </Grid.Row>
-                      </Grid>
-                    </>
-                  )}
-                </Grid>
-              </div>
+                    </Grid>
+                  </>
+                )}
+              </Grid>
             );
           }}
         />
@@ -120,6 +93,7 @@ export default class App extends Component {
                 getMyPics={this.getMyPics}
                 allMyFolders={this.state.allMyFolders}
                 addPicToFolder={this.addPicToFolder}
+                updateFolders={this.updateFolders}
               />
             </>
           )}
@@ -140,6 +114,7 @@ export default class App extends Component {
                         updatePicture={this.updatePicture}
                         selectedFolder={this.state.selectedFolder}
                         deleteFolder={this.deleteFolder}
+                        updateFolder={this.updateFolder}
                       />
                     </>
                   ) : (
@@ -148,7 +123,7 @@ export default class App extends Component {
                         <Icon name="folder outline" />
                         Choose a folder to edit
                       </Label>
-                      <Grid container columns={6}>
+                      <Grid container columns={8}>
                         <Grid.Row>
                           {this.state.allMyFolders.map(folder => (
                             <Grid.Column key={folder.name}>
@@ -192,6 +167,7 @@ export default class App extends Component {
   };
 
   addPicToFolder = (newPicture, folder_id) => {
+    debugger
     const replacementFolder = this.state.allMyFolders.find(
       folder => folder.id === folder_id
     );
@@ -207,6 +183,22 @@ export default class App extends Component {
     });
   };
 
+  updateFolders = newFolder => {
+    debugger
+    this.setState({
+      allMyFolders: [...this.state.allMyFolders, newFolder]
+    });
+  };
+
+  updateFolder = updatedFolder => {
+    const { selectedFolder, allMyFolders } = this.state;
+
+    this.setState({
+      allMyFolders: allMyFolders.map(f =>
+        f.id === selectedFolder.id ? updatedFolder : f
+      )
+    });
+  };
 
   deletePicture = picture => {
     const { selectedFolder, allMyFolders } = this.state;
@@ -241,11 +233,11 @@ export default class App extends Component {
   deleteFolder = folder => {
     const { allMyFolders } = this.state;
 
-    const updatedFolders = allMyFolders.filter(
-      f => f.id !== folder.id
-    );
+    const updatedFolders = allMyFolders.filter(f => f.id !== folder.id);
     this.setState({
-      allMyFolders: updatedFolders})
+      allMyFolders: updatedFolders
+    });
+    this.resetSelectedFolder();
   };
 
   setFolder = selectedFolder => {

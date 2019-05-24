@@ -41,7 +41,9 @@ class CreateContainer extends Component {
       })
     })
       .then(resp => resp.json())
-      .then(newPicture => this.props.addPicToFolder(newPicture, this.state.folder_id));
+      .then(newPicture =>
+        this.props.addPicToFolder(newPicture, this.state.folder_id)
+      );
   };
 
   handleOnSubmit = () => {
@@ -76,21 +78,22 @@ class CreateContainer extends Component {
 
   render() {
     return (
-      <Grid className="main-grid" relaxed celled>
-        <Grid.Row columns={2} divided relaxed>
+      <Grid className="main-grid" container>
+        <Grid.Row columns={2}>
           <Grid.Column>
-            <NewFolderForm />
+            <NewFolderForm
+              allMyFolders={this.props.allMyFolders}
+              updateFolders={this.props.updateFolders}
+            />
           </Grid.Column>
 
-          <Grid.Column relaxed>
-            <Grid.Row>
+          <Grid.Column >
               <FolderDropdown
                 folderId={this.state.folder_id}
                 allMyFolders={this.props.allMyFolders}
                 handleFolderSelectionChange={this.handleFolderSelectionChange}
               />
-            </Grid.Row>
-            <Grid.Row relaxed>
+              <Grid.Row>
               <SearchComponent
                 createPicture={this.createPicture}
                 searchTerm={this.state.searchTerm}
@@ -99,7 +102,7 @@ class CreateContainer extends Component {
                 handleOnSubmit={this.handleOnSubmit}
                 handlePictureSelection={this.handlePictureSelection}
               />
-            </Grid.Row>
+              </Grid.Row>  
           </Grid.Column>
         </Grid.Row>
 

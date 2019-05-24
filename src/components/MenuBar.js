@@ -1,28 +1,21 @@
 import React, { Component } from "react";
 import { Menu, Icon, Image } from "semantic-ui-react";
 import { Link } from "react-router-dom";
+import logo from "../logo.png";
 
 export default class MenuExampleBasic extends Component {
   state = {};
 
-  handleItemClick = (e, { name }) => this.setState({ activeItem: name });
+  handleItemClick = (e, { name }) => {
+    this.setState({ activeItem: name });
+    this.props.resetSelectedFolder();
+  };
 
   render() {
     const { activeItem } = this.state;
 
     return (
       <Menu icon="labeled">
-        <Menu.Item
-          name="home"
-          as={Link}
-          to="/home"
-          active={activeItem === "home"}
-          onClick={this.handleItemClick}
-        >
-          <Icon name="talk" />
-          Home
-        </Menu.Item>
-
         <Menu.Item
           name="folders"
           as={Link}
@@ -53,6 +46,9 @@ export default class MenuExampleBasic extends Component {
         >
           <Icon name="edit outline" />
           Edit
+        </Menu.Item>
+        <Menu.Item position="right">
+          <Image className="logo-navbar" size="tiny" src={logo} />
         </Menu.Item>
       </Menu>
     );

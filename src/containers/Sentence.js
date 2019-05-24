@@ -11,9 +11,9 @@ class Sentence extends React.Component {
     return (
       <>
         <Segment.Group horizontal className="long-segment">
-          <Segment color="blue">
+          <Segment color="red">
             <SayButton
-              className="speak-button"
+              className="speak-button" id="speak-button"
               onClick={event => console.log(event)}
               voice={voices => [].find.call(voices, v => v.lang === "en")}
               speak={this.props.mySentence.map(picture => picture.text)}
@@ -24,7 +24,7 @@ class Sentence extends React.Component {
           </Segment>
 
           <Segment color="yellow">
-            <Grid className="sentence-row" container columns={6}>
+            <Grid className="sentence-row" container columns={8}>
               <Grid.Row>
                 {this.props.mySentence.map(picture => (
                   <Grid.Column>
@@ -41,7 +41,7 @@ class Sentence extends React.Component {
             </Grid>
           </Segment>
 
-          <Segment color="red">
+          <Segment color="blue">
             <Button onClick={this.props.clearSentence}>Clear</Button>
           </Segment>
         </Segment.Group>
