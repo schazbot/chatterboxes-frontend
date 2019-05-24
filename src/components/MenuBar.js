@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Menu, Icon, Image } from "semantic-ui-react";
 import { Link } from "react-router-dom";
+import logo from "../logo.png";
 
 export default class MenuExampleBasic extends Component {
   state = {};
@@ -12,16 +13,6 @@ export default class MenuExampleBasic extends Component {
 
     return (
       <Menu icon="labeled">
-        <Menu.Item
-          name="home"
-          as={Link}
-          to="/home"
-          active={activeItem === "home"}
-          onClick={this.handleItemClick}
-        >
-          <Icon name="talk" />
-          Home
-        </Menu.Item>
 
         <Menu.Item
           name="folders"
@@ -53,6 +44,9 @@ export default class MenuExampleBasic extends Component {
         >
           <Icon name="edit outline" />
           Edit
+        </Menu.Item>
+        <Menu.Item position="right">
+          <Image className="logo-navbar" size="tiny" src={logo} />
         </Menu.Item>
       </Menu>
     );

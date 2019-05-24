@@ -48,8 +48,7 @@ const PictureCardModal = props => {
         }
       >
         <Modal.Header><Icon name="edit" />Edit Text</Modal.Header>
-        <Modal.Content image>
-          <Image wrapped size="medium" src={picture.url} />
+        <Modal.Content>
           <Form>
             <Form.Field>
               <label>Type to change text</label>
@@ -62,6 +61,7 @@ const PictureCardModal = props => {
               Save
             </Button>
           </Form>
+          <Image centered size="medium" src={picture.url} />
         </Modal.Content>
         <Modal.Content>
           <Button float right onClick={handleDelete} color={"red"}>

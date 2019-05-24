@@ -37,7 +37,8 @@ export default class App extends Component {
   render() {
     return (
       <div className="app-container">
-        <MenuBar />
+        <MenuBar setFolder={this.setFolder}
+        selectedFolder={this.state.selectedFolder}/>
         <Route
           exact
           path="/home"
