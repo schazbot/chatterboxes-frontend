@@ -11,7 +11,7 @@ class Sentence extends React.Component {
     return (
       <>
         <Segment.Group horizontal className="long-segment">
-          <Segment color="blue">
+          <Segment color="red">
             <SayButton
               className="speak-button" id="speak-button"
               onClick={event => console.log(event)}
@@ -41,7 +41,7 @@ class Sentence extends React.Component {
             </Grid>
           </Segment>
 
-          <Segment color="red">
+          <Segment color="blue">
             <Button onClick={this.props.clearSentence}>Clear</Button>
           </Segment>
         </Segment.Group>

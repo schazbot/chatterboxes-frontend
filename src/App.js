@@ -169,7 +169,9 @@ export default class App extends Component {
     const replacementFolder = this.state.allMyFolders.find(
       folder => folder.id === folder_id
     );
+    debugger
     const newReplacementFolder = {
+    
       ...replacementFolder,
       pictures: [...replacementFolder.pictures, newPicture]
     };
