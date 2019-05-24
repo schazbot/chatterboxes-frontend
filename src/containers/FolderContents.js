@@ -7,7 +7,7 @@ export default class FolderContents extends Component {
     return (
       <div className="folder-contents-container">
       
-        <Grid relaxed celled container columns={6} textAlign={"center"}>
+        <Grid relaxed celled container columns={8} textAlign={"center"}>
           <Grid.Row>
             {this.props.folder.pictures? (this.props.folder.pictures.map(picture => (
               <Grid.Column key={picture.id}>

@@ -37,29 +37,8 @@ export default class App extends Component {
   render() {
     return (
       <div className="app-container">
-        <MenuBar setFolder={this.setFolder}
+        <MenuBar resetSelectedFolder={this.resetSelectedFolder}
         selectedFolder={this.state.selectedFolder}/>
-        <Route
-          exact
-          path="/home"
-          render={() => (
-            <>
-              <Grid container>
-                <Grid.Row>
-                  <Sentence
-                    mySentence={this.state.mySentence}
-                    handleClick={this.removeFromSentence}
-                    clearSentence={this.clearSentence}
-                  />
-                </Grid.Row>
-                <Grid.Row>
-              
-                </Grid.Row>
-              </Grid>
-            </>
-          )}
-        />
-
         <Route
           exact
           path="/folders"
@@ -86,7 +65,7 @@ export default class App extends Component {
                   </>
                 ) : (
                   <>
-                    <Grid container columns={6}>
+                    <Grid container doubling columns={8}>
                       <Grid.Row>
                         {this.state.allMyFolders.map(folder => (
                           <Grid.Column key={folder.name}>
@@ -143,7 +122,7 @@ export default class App extends Component {
                         <Icon name="folder outline" />
                         Choose a folder to edit
                       </Label>
-                      <Grid container columns={6}>
+                      <Grid container columns={8}>
                         <Grid.Row>
                           {this.state.allMyFolders.map(folder => (
                             <Grid.Column key={folder.name}>

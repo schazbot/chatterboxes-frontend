@@ -1,6 +1,6 @@
 .long-segment {
-  min-height: 14em !important;
-  background-color: lightcyan;
+  min-height: 5em !important;
+  width: 100% !important;
 }
 
 #speak-button {
@@ -20,10 +20,6 @@
   transition: all 0.4s ease 0s;
 }
 
-.long-segment{
-    width: 100% !important
-    }
-
 
 .ui.card {
   margin: 0em 0 !important;
@@ -35,7 +31,13 @@
   padding-top: 5% !important;
   padding-left: 0%;
 }
-
-.logo-navbar{
+.ui.celled.grid {
+    width: 100%;
+    margin: -2em 0;
+    -webkit-box-shadow: 0 0 0 1px #d4d4d5;
+    box-shadow: 0 0 0 1px #d4d4d5;
 }
 
+.ui.relaxed.celled.grid>.row>.column {
+  padding: 1em !important;
+}

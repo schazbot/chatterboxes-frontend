@@ -6,14 +6,16 @@ import logo from "../logo.png";
 export default class MenuExampleBasic extends Component {
   state = {};
 
-  handleItemClick = (e, { name }) => this.setState({ activeItem: name });
+  handleItemClick = (e, { name }) => {
+    this.setState({ activeItem: name });
+    this.props.resetSelectedFolder();
+  };
 
   render() {
     const { activeItem } = this.state;
 
     return (
       <Menu icon="labeled">
-
         <Menu.Item
           name="folders"
           as={Link}

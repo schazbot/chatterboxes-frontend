@@ -68,7 +68,7 @@ export default class FolderContentsEdit extends Component {
 
   render() {
     return (
-      <Grid container celled className="folder-contents-container">
+      <Grid container className="folder-contents-container">
         <Grid.Column width={4}>
           <Grid.Row>
             <Form>
@@ -91,7 +91,7 @@ export default class FolderContentsEdit extends Component {
           </Grid.Row>
         </Grid.Column>
         <Grid.Column width={9}>
-          <Grid padded container columns={4} textAlign={"center"}>
+          <Grid relaxed container columns={4} textAlign={"center"}>
             <Label size={"massive"}>
               <Icon name="edit outline" />
               Choose a picture to edit

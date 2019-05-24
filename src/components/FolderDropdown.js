@@ -18,20 +18,20 @@ class FolderDropdown extends Component {
     const { parsedDropdownOptions } = this;
     return (
       <>
-      <Grid>
-        <Grid.Row relaxed="true">
-          <Label pointing={"right"}>
-            <Icon name="picture" size="big" /> Add pictures
-            to folder
-          </Label>
-         <Dropdown
-            placeholder="Select Folder"
-            selection
-            
-            options={parsedDropdownOptions()}
-            onChange={this.props.handleFolderSelectionChange}
-          />
-        </Grid.Row>
+        <Grid>
+          <Grid.Row>
+            <Label pointing={"below"}>
+              <Icon name="picture" size="big" /> Add pictures to folder
+            </Label>
+          </Grid.Row>
+          <Grid.Row relaxed="true">
+            <Dropdown
+              placeholder="Select Folder"
+              selection
+              options={parsedDropdownOptions()}
+              onChange={this.props.handleFolderSelectionChange}
+            />
+          </Grid.Row>
         </Grid>
       </>
     );

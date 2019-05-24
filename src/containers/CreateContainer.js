@@ -78,7 +78,7 @@ class CreateContainer extends Component {
 
   render() {
     return (
-      <Grid className="main-grid" relaxed celled>
+      <Grid className="main-grid" container>
         <Grid.Row columns={2}>
           <Grid.Column>
             <NewFolderForm
@@ -87,7 +87,7 @@ class CreateContainer extends Component {
             />
           </Grid.Column>
 
-          <Grid.Column relaxed>
+          <Grid.Column >
             <Grid.Row>
               <FolderDropdown
                 folderId={this.state.folder_id}
@@ -96,7 +96,7 @@ class CreateContainer extends Component {
               />
             </Grid.Row>
 
-            <Grid.Row relaxed>
+            <Grid.Row >
               <SearchComponent
                 className="search-api-bar"
                 createPicture={this.createPicture}
