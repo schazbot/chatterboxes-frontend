@@ -1,6 +1,6 @@
 ### Chatterboxes
 
-## An Alternative and Augmentative Communication (AAC) tool giving a voice to those that may not have one.
+# An Alternative and Augmentative Communication (AAC) tool giving a voice to those that may not have one.
 Make sentences using symbols to enforce language aqcuisition, and press speak to hear your sentence!
 
 https://chatterboxes-ff906.web.app/folders
@@ -9,8 +9,9 @@ https://chatterboxes-ff906.web.app/folders
 
 ## Getting Started
 
-# Fork and clone the repo
-# For the backend of this project, go to https://github.com/schazbot/chatterboxes-backend and follow the getting started instructions!
+Fork and clone the repo
+
+For the backend of this project, go to https://github.com/schazbot/chatterboxes-backend and follow the getting started instructions!
 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
