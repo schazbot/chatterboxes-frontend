@@ -1,6 +1,6 @@
-### Chatterboxes
+# Chatterboxes
 
-# An Alternative and Augmentative Communication (AAC) tool giving a voice to those that may not have one.
+### An Alternative and Augmentative Communication (AAC) tool giving a voice to those that may not have one.
 Make sentences using symbols to enforce language aqcuisition, and press speak to hear your sentence!
 
 https://chatterboxes-ff906.web.app/folders
@@ -20,7 +20,7 @@ Open Symbols API for free AAC symbols --- https://www.opensymbols.org/
 
 
 
-# In the project directory, you can run:
+### In the project directory, you can run:
 
 `npm install` 
 to bundle... then
@@ -31,7 +31,7 @@ To run the app in the development mode.
 Open http://localhost:3000 to view it in the browser.
 
 
-## Author
+### Author
 **Charlotte Pearce** [GitHub](https://github.com/schazbot)
 
 
