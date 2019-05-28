@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import PictureCardModal from "../components/PictureCardModal";
 import { Grid, Button, Label, Form, Input, Icon } from "semantic-ui-react";
 
-const EDIT_FOLDER_PATH = "http://localhost:3002/api/v1/folders/";
-const EDIT_PICTURE_PATH = "http://localhost:3002/api/v1/pictures/";
+const EDIT_FOLDER_PATH = "https://chatterboxes-backend.herokuapp.com/api/v1/folders/";
+const EDIT_PICTURE_PATH = "https://chatterboxes-backend.herokuapp.com/api/v1/pictures/";
 
 export default class FolderContentsEdit extends Component {
   state = {
