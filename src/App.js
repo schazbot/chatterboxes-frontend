@@ -41,7 +41,7 @@ export default class App extends Component {
         selectedFolder={this.state.selectedFolder}/>
         <Route
           exact
-          path="/folders"
+          path="/"
           render={() => {
             return (
               <Grid className="folder-container" container>

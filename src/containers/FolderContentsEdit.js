@@ -62,7 +62,6 @@ export default class FolderContentsEdit extends Component {
   };
 
   handlePictureFormChange = e => {
-    debugger
     const { value } = e.target;
     this.setState({ picture: { text: value } });
   };
