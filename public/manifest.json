@@ -3,7 +3,7 @@
   "name": "Chatterboxes",
   "icons": [
     {
-      "src": "ghost.png",
+      "src": "chatboxes.png",
       "sizes": "512x512",
       "type": "image/png"
     }

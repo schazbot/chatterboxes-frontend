@@ -24,13 +24,11 @@ class Sentence extends React.Component {
           </Segment>
 
           <Segment color="yellow">
-            <Grid className="sentence-row" container columns={8}>
+            <Grid className="sentence-row" container columns={6}>
               <Grid.Row>
                 {this.props.mySentence.map(picture => (
                   <Grid.Column>
-                    <PictureCard
-                      width={8}
-                      wrapped={"false"}
+                    <PictureCard                    
                       key={picture.id}
                       handleClick={this.props.handleClick}
                       picture={picture}
@@ -42,7 +40,7 @@ class Sentence extends React.Component {
           </Segment>
 
           <Segment color="blue">
-            <Button onClick={this.props.clearSentence}>Clear</Button>
+            <Button size={"mini"}onClick={this.props.clearSentence}>Clear</Button>
           </Segment>
         </Segment.Group>
       </>

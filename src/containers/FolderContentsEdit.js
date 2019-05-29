@@ -91,7 +91,7 @@ export default class FolderContentsEdit extends Component {
           </Grid.Row>
         </Grid.Column>
         <Grid.Column width={9}>
-          <Grid relaxed container columns={4} textAlign={"center"}>
+          <Grid relaxed container columns={5} textAlign={"center"}>
             <Label size={"massive"}>
               <Icon name="edit outline" />
               Choose a picture to edit
