@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, Form, Label, Icon, Grid } from "semantic-ui-react";
+import { Button, Form, Label, Icon, Grid, Message } from "semantic-ui-react";
 
 const NEW_FOLDER_URL = "http://localhost:3002/api/v1/folders";
 
@@ -7,22 +7,38 @@ class NewFolderForm extends Component {
   state = {
     user_id: 1,
     name: "",
-    image_url: ""
+    image_url: "",
+    error: "",
+    message: ""
   };
 
   createNewFolder = () => {
     return fetch(NEW_FOLDER_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(this.state)
+      body: JSON.stringify({
+        user_id: 1,
+        name: this.state.name,
+        image_url: this.state.image_url
+      })
     })
       .then(resp => resp.json())
-      .then(newFolder => this.props.updateFolders(newFolder)
-      )
+      .then(newFolder => {
+        if (newFolder.error) {
+          this.setState({ error: newFolder.error });
+        } else {
+          this.props.updateFolders(newFolder);
+          this.setState({ message: "saved!" });
+        }
+      });
   };
 
   resetFormState = () => {
     this.setState({ user_id: 1, name: "", image_url: "" });
+  };
+
+  resetErrors = () => {
+    this.setState({ error: "", message: "" });
   };
 
   handleNameChange = e => {
@@ -54,7 +70,8 @@ class NewFolderForm extends Component {
             </Form.Field>
             <Form.Field inline>
               <input
-                type="text"
+                input
+                type="url"
                 id="image"
                 onChange={event => this.handleUrlChange(event)}
                 placeholder="Add image url"
@@ -67,6 +84,16 @@ class NewFolderForm extends Component {
             </Button>
           </Form>
         </Grid.Row>
+        {this.state.error !== "" ? (
+          <Message onDismiss={this.resetErrors} negative>
+            {this.state.error}
+          </Message>
+        ) : null}
+        {this.state.message !== "" ? (
+          <Message onDismiss={this.resetErrors} positive>
+            {this.state.message}
+          </Message>
+        ) : null}
       </Grid>
     );
   }

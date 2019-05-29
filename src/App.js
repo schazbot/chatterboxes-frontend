@@ -36,15 +36,15 @@ export default class App extends Component {
 
   render() {
     return (
-      <div className="app-container">
+      <>
         <MenuBar resetSelectedFolder={this.resetSelectedFolder}
         selectedFolder={this.state.selectedFolder}/>
         <Route
           exact
-          path="/folders"
+          path="/"
           render={() => {
             return (
-              <Grid className="folder-container" container>
+              <Grid className="folder-container" container centered>
                 <Grid.Row>
                   <Sentence
                     mySentence={this.state.mySentence}
@@ -65,10 +65,10 @@ export default class App extends Component {
                   </>
                 ) : (
                   <>
-                    <Grid container doubling columns={8}>
+                    <Grid container columns={4}>
                       <Grid.Row>
                         {this.state.allMyFolders.map(folder => (
-                          <Grid.Column key={folder.name}>
+                          <Grid.Column mobile={4} tablet={6} computer={2} key={folder.name}>
                             <FolderCard
                               key={folder.id}
                               folder={folder}
@@ -123,10 +123,10 @@ export default class App extends Component {
                         <Icon name="folder outline" />
                         Choose a folder to edit
                       </Label>
-                      <Grid container columns={8}>
+                      <Grid container columns={4}>
                         <Grid.Row>
                           {this.state.allMyFolders.map(folder => (
-                            <Grid.Column key={folder.name}>
+                            <Grid.Column mobile={4} tablet={6} computer={2} key={folder.name}>
                               <FolderCard
                                 key={folder.id}
                                 folder={folder}
@@ -143,7 +143,7 @@ export default class App extends Component {
             </>
           )}
         />
-      </div>
+      </>
     );
   }
 
@@ -184,10 +184,10 @@ export default class App extends Component {
   };
 
   updateFolders = newFolder => {
-    debugger
     this.setState({
       allMyFolders: [...this.state.allMyFolders, newFolder]
-    });
+    })
+
   };
 
   updateFolder = updatedFolder => {

@@ -62,7 +62,6 @@ export default class FolderContentsEdit extends Component {
   };
 
   handlePictureFormChange = e => {
-    debugger
     const { value } = e.target;
     this.setState({ picture: { text: value } });
   };
@@ -92,14 +91,14 @@ export default class FolderContentsEdit extends Component {
           </Grid.Row>
         </Grid.Column>
         <Grid.Column width={9}>
-          <Grid relaxed container columns={4} textAlign={"center"}>
+          <Grid relaxed container columns={5} textAlign={"center"}>
             <Label size={"massive"}>
               <Icon name="edit outline" />
               Choose a picture to edit
             </Label>
             <Grid.Row>
               {this.props.folder.pictures ? (this.props.folder.pictures.map(picture => (
-                <Grid.Column key={picture.id}>
+                <Grid.Column mobile={2} tablet={4} computer={4} key={picture.id}>
                   <PictureCardModal
                     className="container-cell "
                     key={picture.id}
@@ -114,7 +113,7 @@ export default class FolderContentsEdit extends Component {
               ))) : null}
             </Grid.Row>
 
-            <Button onClick={this.props.resetSelectedFolder}>
+            <Button size={"tiny"}onClick={this.props.resetSelectedFolder}>
               <Icon name="backward" />
               Back
             </Button>

@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import SearchComponent from "../components/SearchComponent"
 import { Dropdown, Grid, Icon, Label } from "semantic-ui-react";
 
 class FolderDropdown extends Component {
