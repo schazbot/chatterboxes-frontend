@@ -27,7 +27,7 @@ class Sentence extends React.Component {
             <Grid className="sentence-row" container columns={6}>
               <Grid.Row>
                 {this.props.mySentence.map(picture => (
-                  <Grid.Column>
+                  <Grid.Column largeScreen={3} widescreen={1}>
                     <PictureCard                    
                       key={picture.id}
                       handleClick={this.props.handleClick}

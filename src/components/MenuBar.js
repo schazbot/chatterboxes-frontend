@@ -47,9 +47,6 @@ export default class MenuExampleBasic extends Component {
           <Icon name="edit outline" />
           Edit
         </Menu.Item>
-        <Menu.Item position="right">
-          <Image className="logo-navbar" size="tiny" src={logo} />
-        </Menu.Item>
       </Menu>
     );
   }

@@ -11,7 +11,7 @@ import FolderCard from "./components/FolderCard";
 import FolderContents from "./containers/FolderContents";
 import FolderContentsEdit from "./containers/FolderContentsEdit";
 
-const USER_URL = "https://chatterboxes-backend.herokuapp.com//api/v1/users/1";
+const USER_URL = "http://localhost:3002/api/v1/users/1";
 
 export default class App extends Component {
   state = {
@@ -184,10 +184,10 @@ export default class App extends Component {
   };
 
   updateFolders = newFolder => {
-    debugger
     this.setState({
       allMyFolders: [...this.state.allMyFolders, newFolder]
-    });
+    })
+
   };
 
   updateFolder = updatedFolder => {
