@@ -5,7 +5,7 @@ const PictureCard = props => {
   const { picture } = props;
 
   return (
-    <Card key={props.picture.id} onClick={() => props.handleClick(picture)}wrapped={"false"}>
+    <Card key={props.picture.id} onClick={() => props.handleClick(picture)}>
     <Card.Content>
       <Image src={props.picture.url} />
       

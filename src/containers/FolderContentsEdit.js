@@ -98,7 +98,7 @@ export default class FolderContentsEdit extends Component {
             </Label>
             <Grid.Row>
               {this.props.folder.pictures ? (this.props.folder.pictures.map(picture => (
-                <Grid.Column key={picture.id}>
+                <Grid.Column mobile={2} tablet={4} computer={4} key={picture.id}>
                   <PictureCardModal
                     className="container-cell "
                     key={picture.id}
@@ -113,7 +113,7 @@ export default class FolderContentsEdit extends Component {
               ))) : null}
             </Grid.Row>
 
-            <Button onClick={this.props.resetSelectedFolder}>
+            <Button size={"tiny"}onClick={this.props.resetSelectedFolder}>
               <Icon name="backward" />
               Back
             </Button>

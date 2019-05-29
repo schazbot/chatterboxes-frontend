@@ -68,7 +68,7 @@ export default class App extends Component {
                     <Grid container columns={4}>
                       <Grid.Row>
                         {this.state.allMyFolders.map(folder => (
-                          <Grid.Column key={folder.name}>
+                          <Grid.Column mobile={4} tablet={6} computer={2} key={folder.name}>
                             <FolderCard
                               key={folder.id}
                               folder={folder}
@@ -126,7 +126,7 @@ export default class App extends Component {
                       <Grid container columns={4}>
                         <Grid.Row>
                           {this.state.allMyFolders.map(folder => (
-                            <Grid.Column key={folder.name}>
+                            <Grid.Column mobile={4} tablet={6} computer={2} key={folder.name}>
                               <FolderCard
                                 key={folder.id}
                                 folder={folder}

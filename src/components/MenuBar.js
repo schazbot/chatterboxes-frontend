@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import { Menu, Icon, Image } from "semantic-ui-react";
+import { Menu, Icon } from "semantic-ui-react";
 import { Link } from "react-router-dom";
-import logo from "../logo.png";
 
 export default class MenuExampleBasic extends Component {
   state = {};
