@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Button, Form, Label, Icon, Grid, Message } from "semantic-ui-react";
 
-const NEW_FOLDER_URL = "http://localhost:3002/api/v1/folders";
+const NEW_FOLDER_URL = "https://chatterboxes-backend.herokuapp.com/api/v1/folders";
 
 class NewFolderForm extends Component {
   state = {

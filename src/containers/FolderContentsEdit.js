@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PictureCardModal from "../components/PictureCardModal";
-import { Grid, Button, Label, Form, Input, Icon } from "semantic-ui-react";
+import { Grid, Button, Label, Form, Input, Icon, Message } from "semantic-ui-react";
 
 const EDIT_FOLDER_PATH = "http://localhost:3002/api/v1/folders/";
 const EDIT_PICTURE_PATH = "http://localhost:3002/api/v1/pictures/";
@@ -54,8 +54,16 @@ export default class FolderContentsEdit extends Component {
       body: JSON.stringify({
         name: this.state.folder.name
       })
-    }).then(resp => resp.json()).then(editedFolder => 
-      this.props.updateFolder(editedFolder));
+    })
+      .then(resp => resp.json())
+      .then(editedFolder => {
+        if (editedFolder.error) {
+          this.setState({ error: editedFolder.error });
+        } else {
+          this.props.updateFolder(editedFolder);
+          this.setState({ message: "saved!" });
+        }
+      });
   };
 
   handleFormChange = e => {
@@ -66,6 +74,10 @@ export default class FolderContentsEdit extends Component {
   handlePictureFormChange = e => {
     const { value } = e.target;
     this.setState({ picture: { text: value } });
+  };
+
+  resetErrors = () => {
+    this.setState({ error: "", message: "" });
   };
 
   render() {
@@ -91,6 +103,11 @@ export default class FolderContentsEdit extends Component {
               </Form.Field>
             </Form>
           </Grid.Row>
+          {this.state.message !== "" ? (
+            <Message onDismiss={this.resetErrors} positive>
+              {this.state.message}
+            </Message>
+          ) : null}
         </Grid.Column>
         <Grid.Column width={9}>
           <Grid relaxed container columns={5} textAlign={"center"}>
@@ -99,23 +116,30 @@ export default class FolderContentsEdit extends Component {
               Choose a picture to edit
             </Label>
             <Grid.Row>
-              {this.props.folder.pictures ? (this.props.folder.pictures.map(picture => (
-                <Grid.Column mobile={2} tablet={4} computer={4} key={picture.id}>
-                  <PictureCardModal
-                    className="container-cell "
-                    key={picture.id}
-                    picture={picture}
-                    setPicture={this.setPicture}
-                    editPicture={this.editPicture}
-                    editedPicToFolder={this.props.editedPicToFolder}
-                    deletePicture={this.deletePicture}
-                    handlePictureFormChange={this.handlePictureFormChange}
-                  />
-                </Grid.Column>
-              ))) : null}
+              {this.props.folder.pictures
+                ? this.props.folder.pictures.map(picture => (
+                    <Grid.Column
+                      mobile={2}
+                      tablet={4}
+                      computer={4}
+                      key={picture.id}
+                    >
+                      <PictureCardModal
+                        className="container-cell "
+                        key={picture.id}
+                        picture={picture}
+                        setPicture={this.setPicture}
+                        editPicture={this.editPicture}
+                        editedPicToFolder={this.props.editedPicToFolder}
+                        deletePicture={this.deletePicture}
+                        handlePictureFormChange={this.handlePictureFormChange}
+                      />
+                    </Grid.Column>
+                  ))
+                : null}
             </Grid.Row>
 
-            <Button size={"tiny"}onClick={this.props.resetSelectedFolder}>
+            <Button size={"tiny"} onClick={this.props.resetSelectedFolder}>
               <Icon name="backward" />
               Back
             </Button>
@@ -127,7 +151,6 @@ export default class FolderContentsEdit extends Component {
             Delete folder
           </Label>
           <Button onClick={this.deleteFolderFromApi} color={"red"}>
-            {" "}
             <Icon name="trash" />
             Delete
           </Button>
