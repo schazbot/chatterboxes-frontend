@@ -6,7 +6,7 @@ import APICard from "../components/APICard";
 import FolderDropdown from "../components/FolderDropdown";
 import SearchComponent from "../components/SearchComponent";
 
-const PICTURES_PATH = "http://localhost:3002/api/v1/pictures/create";
+const PICTURES_PATH = "https://chatterboxes-backend.herokuapp.com/api/v1/pictures/create";
 
 class CreateContainer extends Component {
   token = null;
