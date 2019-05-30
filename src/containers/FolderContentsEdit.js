@@ -7,6 +7,7 @@ const EDIT_PICTURE_PATH = "http://localhost:3002/api/v1/pictures/";
 
 export default class FolderContentsEdit extends Component {
   state = {
+    message: "",
     selectedPicture: null,
     folder: { name: "" },
     picture: {
@@ -53,7 +54,8 @@ export default class FolderContentsEdit extends Component {
       body: JSON.stringify({
         name: this.state.folder.name
       })
-    }).then(resp => resp.json()).then(editedFolder => this.props.updateFolder(editedFolder));
+    }).then(resp => resp.json()).then(editedFolder => 
+      this.props.updateFolder(editedFolder));
   };
 
   handleFormChange = e => {
