@@ -8,7 +8,7 @@ Make sentences using symbols to enforce language aqcuisition, and press speak to
 *VIDEO DEMO -> https://vimeo.com/338432555
 
 
-## Getting Started
+## Collaborating - getting started
 
 Fork and clone the repo
 
@@ -21,7 +21,7 @@ Open Symbols API for free AAC symbols --- https://www.opensymbols.org/
 
 
 
-### In the project directory, you can run:
+### In the project directory run:
 
 `npm install` 
 to bundle... then
