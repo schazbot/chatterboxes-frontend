@@ -8,6 +8,7 @@ import { Grid, Segment, Button } from "semantic-ui-react";
 
 class Sentence extends React.Component {
   render() {
+    const { mySentence, handleClick, clearSentence} = this.props
     return (
         <>
           <Segment.Group horizontal className="long-segment">
@@ -16,7 +17,7 @@ class Sentence extends React.Component {
               id="speak-button"
               onClick={event => console.log(event)}
               voice={voices => [].find.call(voices, v => v.lang === "en")}
-              speak={this.props.mySentence.map(picture => picture.text)}
+              speak={mySentence.map(picture => picture.text)}
             >
               <i className="fa fa-volume-up fa-10x" />
               Speak
@@ -25,11 +26,11 @@ class Sentence extends React.Component {
             <Segment color="blue">
               <Grid className="sentence-row" container columns={6}>
                 <Grid.Row>
-                  {this.props.mySentence.map(picture => (
+                  {mySentence.map(picture => (
                     <Grid.Column>
                       <PictureCard
                         key={picture.id}
-                        handleClick={this.props.handleClick}
+                        handleClick={handleClick}
                         picture={picture}
                       />
                     </Grid.Column>
@@ -37,7 +38,7 @@ class Sentence extends React.Component {
                 </Grid.Row>
               </Grid>
             </Segment>
-            <Button size={"mini"} onClick={this.props.clearSentence}>
+            <Button size={"mini"} onClick={clearSentence}>
               Clear
             </Button>
           </Segment.Group>

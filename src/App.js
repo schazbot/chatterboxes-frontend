@@ -171,8 +171,9 @@ export default class App extends Component {
   };
 
   addPicToFolder = (newPicture, folder_id) => {
-    debugger
-    const replacementFolder = this.state.allMyFolders.find(
+    const { allMyFolders} = this.state
+
+    const replacementFolder = allMyFolders.find(
       folder => folder.id === folder_id
     );
     const newReplacementFolder = {
@@ -181,7 +182,7 @@ export default class App extends Component {
     };
     this.setState({
       allMyFolders: [
-        ...this.state.allMyFolders.filter(folder => folder.id !== folder_id),
+        ...allMyFolders.filter(folder => folder.id !== folder_id),
         newReplacementFolder
       ]
     });

@@ -10,7 +10,7 @@ import {
 } from "semantic-ui-react";
 
 const PictureCardModal = props => {
-  const { picture } = props;
+  const { picture, handlePictureFormChange, setPicture } = props;
 
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -37,7 +37,7 @@ const PictureCardModal = props => {
         trigger={
           <Button
             onClick={() => {
-              props.setPicture(picture);
+              setPicture(picture);
               setModalOpen(true);
             }}
             color={"blue"}
@@ -53,7 +53,7 @@ const PictureCardModal = props => {
             <Form.Field>
               <label>Type to change text</label>
               <input
-                onChange={props.handlePictureFormChange}
+                onChange={handlePictureFormChange}
                 placeholder={picture.text}
               />
             </Form.Field>
