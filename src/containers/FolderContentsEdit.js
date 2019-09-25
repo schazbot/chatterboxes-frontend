@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PictureCardModal from "../components/PictureCardModal";
 import { Grid, Button, Label, Form, Input, Icon, Message } from "semantic-ui-react";
-
+import Api from "../Api";
 const EDIT_FOLDER_PATH = "https://chatterboxes-backend.herokuapp.com/api/v1/folders/";
 const EDIT_PICTURE_PATH = "https://chatterboxes-backend.herokuapp.com/api/v1/pictures/";
 
@@ -16,10 +16,7 @@ export default class FolderContentsEdit extends Component {
   };
 
   deletePicture = () => {
-    return fetch(EDIT_PICTURE_PATH + `${this.state.selectedPicture.id}`, {
-      method: "DELETE"
-    })
-      .then(resp => resp.json())
+    Api.destroy(EDIT_PICTURE_PATH, this.state.selectedPicture.id)
       .then(deletedPic => this.props.deletePicture(deletedPic));
   };
 
@@ -118,24 +115,24 @@ export default class FolderContentsEdit extends Component {
             <Grid.Row>
               {this.props.folder.pictures
                 ? this.props.folder.pictures.map(picture => (
-                    <Grid.Column
-                      mobile={2}
-                      tablet={4}
-                      computer={4}
+                  <Grid.Column
+                    mobile={2}
+                    tablet={4}
+                    computer={4}
+                    key={picture.id}
+                  >
+                    <PictureCardModal
+                      className="container-cell "
                       key={picture.id}
-                    >
-                      <PictureCardModal
-                        className="container-cell "
-                        key={picture.id}
-                        picture={picture}
-                        setPicture={this.setPicture}
-                        editPicture={this.editPicture}
-                        editedPicToFolder={this.props.editedPicToFolder}
-                        deletePicture={this.deletePicture}
-                        handlePictureFormChange={this.handlePictureFormChange}
-                      />
-                    </Grid.Column>
-                  ))
+                      picture={picture}
+                      setPicture={this.setPicture}
+                      editPicture={this.editPicture}
+                      editedPicToFolder={this.props.editedPicToFolder}
+                      deletePicture={this.deletePicture}
+                      handlePictureFormChange={this.handlePictureFormChange}
+                    />
+                  </Grid.Column>
+                ))
                 : null}
             </Grid.Row>
 
