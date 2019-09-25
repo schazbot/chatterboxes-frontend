@@ -16,7 +16,7 @@ export default class FolderContentsEdit extends Component {
   };
 
   deletePicture = () => {
-    Api.delete(EDIT_PICTURE_PATH, this.state.selectedPicture.id)
+    Api.destroy(EDIT_PICTURE_PATH, this.state.selectedPicture.id)
       .then(deletedPic => this.props.deletePicture(deletedPic));
   };
 
@@ -32,23 +32,14 @@ export default class FolderContentsEdit extends Component {
   };
 
   deleteFolderFromApi = () => {
-    return fetch(EDIT_FOLDER_PATH + `${this.props.selectedFolder.id}`, {
-      method: "DELETE"
-    })
-      .then(resp => resp.json())
+    Api.destroy(EDIT_FOLDER_PATH, this.props.selectedFolder.id)
       .then(deletedFolder => this.props.deleteFolder(deletedFolder));
   };
 
   editFolder = () => {
-    return fetch(EDIT_FOLDER_PATH + `${this.props.folder.id}`, {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
+    Api.patch(EDIT_FOLDER_PATH, this.props.folder.id, {
         name: this.state.folder.name
-      })
-    })
-      .then(resp => resp.json())
-      .then(editedFolder => {
+      }).then(editedFolder => {
         if (editedFolder.error) {
           this.setState({ error: editedFolder.error });
         } else {
