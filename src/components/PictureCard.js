@@ -1,13 +1,12 @@
 import React from "react";
 import { Card, Image } from "semantic-ui-react";
 
-const PictureCard = props => {
-  const { picture } = props;
+const PictureCard = ({ picture, handleClick }) => {
 
   return (
-    <Card key={props.picture.id} onClick={() => props.handleClick(picture)}>
+    <Card key={picture.id} onClick={() => handleClick(picture)}>
     <Card.Content>
-      <Image src={props.picture.url} />
+      <Image src={picture.url} />
       
       <Card.Description>
         {props.picture.text}

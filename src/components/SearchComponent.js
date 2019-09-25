@@ -3,6 +3,7 @@ import { Icon, Grid } from "semantic-ui-react";
 
 export default class SearchComponent extends Component {
   render() {
+    const { handleSearchQuery} = this.props
     return (
       <>
         <Grid>
@@ -11,7 +12,7 @@ export default class SearchComponent extends Component {
             className="search-api-bar"
             type="text"
             placeholder="Search for..."
-            onChange={this.props.handleSearchQuery}
+            onChange={handleSearchQuery}
           />
           <Icon color={"grey"} name="search" size="big" />
           </Grid.Row>

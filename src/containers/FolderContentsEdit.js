@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PictureCardModal from "../components/PictureCardModal";
 import { Grid, Button, Label, Form, Input, Icon, Message } from "semantic-ui-react";
-
+import Api from "../Api";
 const EDIT_FOLDER_PATH = "https://chatterboxes-backend.herokuapp.com/api/v1/folders/";
 const EDIT_PICTURE_PATH = "https://chatterboxes-backend.herokuapp.com/api/v1/pictures/";
 
@@ -15,24 +15,22 @@ export default class FolderContentsEdit extends Component {
     }
   };
 
+
+
   deletePicture = () => {
-    return fetch(EDIT_PICTURE_PATH + `${this.state.selectedPicture.id}`, {
-      method: "DELETE"
-    })
-      .then(resp => resp.json())
-      .then(deletedPic => this.props.deletePicture(deletedPic));
+    const { selectedPicture } = this.state
+    const { deletePicture } = this.props
+    Api.destroy(EDIT_PICTURE_PATH, selectedPicture.id)
+      .then(deletedPic => deletePicture(deletedPic));
   };
 
   editPicture = () => {
-    return fetch(EDIT_PICTURE_PATH + `${this.state.selectedPicture.id}`, {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        text: this.state.picture.text
-      })
-    })
-      .then(resp => resp.json())
-      .then(editedPic => this.props.updatePicture(editedPic));
+    const { selectedPicture, picture } = this.state
+    const { updatePicture } = this.props
+    Api.patch(EDIT_PICTURE_PATH, selectedPicture.id, {
+      text: picture.text
+    }
+    ).then(editedPic => updatePicture(editedPic));
   };
 
   setPicture = selectedPicture => {
@@ -40,30 +38,25 @@ export default class FolderContentsEdit extends Component {
   };
 
   deleteFolderFromApi = () => {
-    return fetch(EDIT_FOLDER_PATH + `${this.props.selectedFolder.id}`, {
-      method: "DELETE"
-    })
-      .then(resp => resp.json())
-      .then(deletedFolder => this.props.deleteFolder(deletedFolder));
+    const { selectedFolder, deleteFolder } = this.props
+
+    Api.destroy(EDIT_FOLDER_PATH, selectedFolder.id)
+      .then(deletedFolder => deleteFolder(deletedFolder));
   };
 
   editFolder = () => {
-    return fetch(EDIT_FOLDER_PATH + `${this.props.folder.id}`, {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        name: this.state.folder.name
-      })
-    })
-      .then(resp => resp.json())
-      .then(editedFolder => {
-        if (editedFolder.error) {
-          this.setState({ error: editedFolder.error });
-        } else {
-          this.props.updateFolder(editedFolder);
-          this.setState({ message: "saved!" });
-        }
-      });
+    const { folder, updateFolder } = this.props
+
+    Api.patch(EDIT_FOLDER_PATH, folder.id, {
+      name: this.state.folder.name
+    }).then(editedFolder => {
+      if (editedFolder.error) {
+        this.setState({ error: editedFolder.error });
+      } else {
+        updateFolder(editedFolder);
+        this.setState({ message: "saved!" });
+      }
+    });
   };
 
   handleFormChange = e => {
@@ -81,6 +74,9 @@ export default class FolderContentsEdit extends Component {
   };
 
   render() {
+    const { folder, editedPicToFolder, resetSelectedFolder } = this.props
+    const { message } = this.state
+
     return (
       <Grid container className="folder-contents-container">
         <Grid.Column width={4}>
@@ -94,7 +90,7 @@ export default class FolderContentsEdit extends Component {
                 <Input
                   size="small"
                   onChange={this.handleFormChange}
-                  placeholder={this.props.folder.name}
+                  placeholder={folder.name}
                 />
                 <Button onClick={this.editFolder} color={"green"}>
                   <Icon name="save" />
@@ -103,9 +99,9 @@ export default class FolderContentsEdit extends Component {
               </Form.Field>
             </Form>
           </Grid.Row>
-          {this.state.message !== "" ? (
+          {message !== "" ? (
             <Message onDismiss={this.resetErrors} positive>
-              {this.state.message}
+              {message}
             </Message>
           ) : null}
         </Grid.Column>
@@ -116,30 +112,30 @@ export default class FolderContentsEdit extends Component {
               Choose a picture to edit
             </Label>
             <Grid.Row>
-              {this.props.folder.pictures
-                ? this.props.folder.pictures.map(picture => (
-                    <Grid.Column
-                      mobile={2}
-                      tablet={4}
-                      computer={4}
+              {folder.pictures
+                ? folder.pictures.map(picture => (
+                  <Grid.Column
+                    mobile={2}
+                    tablet={4}
+                    computer={4}
+                    key={picture.id}
+                  >
+                    <PictureCardModal
+                      className="container-cell "
                       key={picture.id}
-                    >
-                      <PictureCardModal
-                        className="container-cell "
-                        key={picture.id}
-                        picture={picture}
-                        setPicture={this.setPicture}
-                        editPicture={this.editPicture}
-                        editedPicToFolder={this.props.editedPicToFolder}
-                        deletePicture={this.deletePicture}
-                        handlePictureFormChange={this.handlePictureFormChange}
-                      />
-                    </Grid.Column>
-                  ))
+                      picture={picture}
+                      setPicture={this.setPicture}
+                      editPicture={this.editPicture}
+                      editedPicToFolder={editedPicToFolder}
+                      deletePicture={this.deletePicture}
+                      handlePictureFormChange={this.handlePictureFormChange}
+                    />
+                  </Grid.Column>
+                ))
                 : null}
             </Grid.Row>
 
-            <Button size={"tiny"} onClick={this.props.resetSelectedFolder}>
+            <Button size={"tiny"} onClick={resetSelectedFolder}>
               <Icon name="backward" />
               Back
             </Button>

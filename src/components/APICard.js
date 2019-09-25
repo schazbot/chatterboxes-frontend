@@ -1,8 +1,7 @@
 import React from "react";
 import { Card, Image, Button } from "semantic-ui-react";
 
-const PictureCard = props => {
-  const { picture } = props;
+const PictureCard = ({ picture }) => {
 
   return (
     <Card

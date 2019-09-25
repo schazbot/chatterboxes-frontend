@@ -4,23 +4,24 @@ import { Grid, Button } from "semantic-ui-react";
 
 export default class FolderContents extends Component {
   render() {
+    const {folder, handleClick, resetSelectedFolder} = this.props
     return (
       <div className="folder-contents-container">
       
         <Grid container columns={6} textAlign={"center"}>
           <Grid.Row>
-            {this.props.folder.pictures? (this.props.folder.pictures.map(picture => (
+            {folder.pictures? (folder.pictures.map(picture => (
               <Grid.Column key={picture.id}>
                 <PictureCard
                   className="container-cell "
                   key={picture.id}
                   picture={picture}
-                  handleClick={this.props.handleClick}
+                  handleClick={handleClick}
                   />
               </Grid.Column>
             ))) : null}
           </Grid.Row>
-          <Button onClick={this.props.resetSelectedFolder}>Back</Button>
+          <Button onClick={resetSelectedFolder}>Back</Button>
         </Grid>
       </div>
     );
