@@ -9,7 +9,7 @@ const PictureCard = ({ picture, handleClick }) => {
       <Image src={picture.url} />
       
       <Card.Description>
-        {props.picture.text}
+        {picture.text}
       </Card.Description>
       </Card.Content>
     </Card>

@@ -5,6 +5,7 @@ import NewFolderForm from "./NewFolderForm";
 import APICard from "../components/APICard";
 import FolderDropdown from "../components/FolderDropdown";
 import SearchComponent from "../components/SearchComponent";
+import Api from "../Api";
 
 const PICTURES_PATH = "https://chatterboxes-backend.herokuapp.com/api/v1/pictures/create";
 
@@ -31,19 +32,15 @@ class CreateContainer extends Component {
   };
 
   createPicture = () => {
-    return fetch(PICTURES_PATH, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        folder_id: this.state.folder_id,
-        text: this.state.selectedSearchResult.text,
-        url: this.state.selectedSearchResult.url
-      })
-    })
-      .then(resp => resp.json())
-      .then(newPicture =>
-        this.props.addPicToFolder(newPicture, this.state.folder_id)
-      );
+    const { selectedSearchResult, folder_id } = this.state
+    const { addPicToFolder } = this.props
+    Api.post(PICTURES_PATH, {
+      folder_id: folder_id,
+      text: selectedSearchResult.text,
+      url: selectedSearchResult.url
+    }).then(newPicture =>
+      addPicToFolder(newPicture, folder_id)
+    );
   };
 
   handleOnSubmit = () => {
@@ -63,8 +60,7 @@ class CreateContainer extends Component {
     const token = {};
     this.token = token;
 
-    fetch(url)
-      .then(results => results.json())
+    Api.get(url)
       .then(data => {
         if (this.token === token) {
           this.setState({ searchResults: data });
@@ -77,32 +73,34 @@ class CreateContainer extends Component {
   }
 
   render() {
+    const { folder_id, searchTerm, searchResults } = this.state
+    const {allMyFolders, updateFolders  } = this.props
     return (
       <Grid className="main-grid" container>
         <Grid.Row columns={2}>
           <Grid.Column>
             <NewFolderForm
-              allMyFolders={this.props.allMyFolders}
-              updateFolders={this.props.updateFolders}
+              allMyFolders={allMyFolders}
+              updateFolders={updateFolders}
             />
           </Grid.Column>
 
           <Grid.Column >
-              <FolderDropdown
-                folderId={this.state.folder_id}
-                allMyFolders={this.props.allMyFolders}
-                handleFolderSelectionChange={this.handleFolderSelectionChange}
-              />
-              <Grid.Row>
+            <FolderDropdown
+              folderId={folder_id}
+              allMyFolders={allMyFolders}
+              handleFolderSelectionChange={this.handleFolderSelectionChange}
+            />
+            <Grid.Row>
               <SearchComponent
                 createPicture={this.createPicture}
-                searchTerm={this.state.searchTerm}
-                searchResults={this.state.searchResults}
+                searchTerm={searchTerm}
+                searchResults={searchResults}
                 handleSearchQuery={this.handleSearchQuery}
                 handleOnSubmit={this.handleOnSubmit}
                 handlePictureSelection={this.handlePictureSelection}
               />
-              </Grid.Row>  
+            </Grid.Row>
           </Grid.Column>
         </Grid.Row>
 
@@ -113,7 +111,6 @@ class CreateContainer extends Component {
                 picture={picture}
                 key={picture.id}
                 handlePictureSelection={this.handlePictureSelection}
-                createPicture={this.props.createPicture}
                 handleOnSubmit={this.handleOnSubmit}
               />
             </Grid.Column>
