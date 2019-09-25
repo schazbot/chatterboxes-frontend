@@ -16,20 +16,15 @@ export default class FolderContentsEdit extends Component {
   };
 
   deletePicture = () => {
-    Api.destroy(EDIT_PICTURE_PATH, this.state.selectedPicture.id)
+    Api.delete(EDIT_PICTURE_PATH, this.state.selectedPicture.id)
       .then(deletedPic => this.props.deletePicture(deletedPic));
   };
 
   editPicture = () => {
-    return fetch(EDIT_PICTURE_PATH + `${this.state.selectedPicture.id}`, {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
+    Api.patch(EDIT_PICTURE_PATH, this.state.selectedPicture.id, {
         text: this.state.picture.text
-      })
-    })
-      .then(resp => resp.json())
-      .then(editedPic => this.props.updatePicture(editedPic));
+      }
+    ).then(editedPic => this.props.updatePicture(editedPic));
   };
 
   setPicture = selectedPicture => {

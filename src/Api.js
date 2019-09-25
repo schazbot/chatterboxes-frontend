@@ -1,6 +1,6 @@
 const headers = {
   "Content-Type": "application/json",
-  Accepts: "application/json"
+  Accept: "application/json"
 };
 
 
@@ -13,9 +13,8 @@ const post = (url, id, data) => {
     method: 'POST',
     headers: headers,
     body: JSON.stringify(data)
-  })
+  }).then(resp => resp.json())
 }
-
 
 const destroy = (url, id) => {
   return fetch(`${url}${id}`, {
@@ -23,14 +22,12 @@ const destroy = (url, id) => {
   }).then(resp => resp.json())
 }
 
-const patch = (url, id, picData) => {
-  return fetch(`${url}${id}`, {
+const patch = (url, id, data) => {
+  return fetch(url + id, {
     method: "PATCH",
     headers: headers,
-    body: JSON.stringify(picData)
-  })
+    body: JSON.stringify(data)
+  }).then(resp => resp.json())
 }
-
-
 
 export default {get, post, destroy, patch}
