@@ -1,11 +1,9 @@
 import React from "react";
 import { Card, Image } from "semantic-ui-react";
 
-const FolderCard = props => {
-  const { folder } = props;
-
+const FolderCard = ({ folder, handleClick }) => {
   return (
-    <Card className="folder-card" color='black' onClick={() => props.handleClick(folder)} >
+    <Card className="folder-card" color='black' onClick={() => handleClick(folder)} >
       <Card.Content>
         <Image src={folder.image_url} />
 

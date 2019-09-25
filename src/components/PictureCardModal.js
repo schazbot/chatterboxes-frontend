@@ -9,8 +9,7 @@ import {
   Icon
 } from "semantic-ui-react";
 
-const PictureCardModal = props => {
-  const { picture, handlePictureFormChange, setPicture } = props;
+const PictureCardModal = ({ picture, handlePictureFormChange, setPicture }) => {
 
   const [modalOpen, setModalOpen] = useState(false);
 
