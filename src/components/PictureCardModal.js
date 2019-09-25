@@ -9,17 +9,17 @@ import {
   Icon
 } from "semantic-ui-react";
 
-const PictureCardModal = ({ picture, handlePictureFormChange, setPicture }) => {
+const PictureCardModal = ({ editPicture, deletePicture, picture, handlePictureFormChange, setPicture }) => {
 
   const [modalOpen, setModalOpen] = useState(false);
 
   const handleEditSave = () => {
-    props.editPicture();
+    editPicture();
     setModalOpen(false);
   };
 
   const handleDelete = () => {
-    props.deletePicture();
+    deletePicture();
     setModalOpen(false);
   };
   

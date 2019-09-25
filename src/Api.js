@@ -8,8 +8,8 @@ const get = (url) => {
   return fetch(url).then(resp => resp.json())
 }
 
-const post = (url, id, data) => {
-  return fetch(`${url}${id}`, {
+const post = (url, data) => {
+  return fetch(url, {
     method: 'POST',
     headers: headers,
     body: JSON.stringify(data)

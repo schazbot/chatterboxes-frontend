@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Button, Form, Label, Icon, Grid, Message } from "semantic-ui-react";
+import Api from "../Api";
 
 const NEW_FOLDER_URL = "https://chatterboxes-backend.herokuapp.com/api/v1/folders";
 
@@ -13,17 +14,11 @@ class NewFolderForm extends Component {
   };
 
   createNewFolder = () => {
-    return fetch(NEW_FOLDER_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
+    Api.post(NEW_FOLDER_URL, {
         user_id: 1,
         name: this.state.name,
         image_url: this.state.image_url
-      })
-    })
-      .then(resp => resp.json())
-      .then(newFolder => {
+      }).then(newFolder => {
         if (newFolder.error) {
           this.setState({ error: newFolder.error });
         } else {
@@ -49,6 +44,8 @@ class NewFolderForm extends Component {
   };
 
   render() {
+
+    const { name, image_url, error, message} = this.state
     return (
       <Grid columns={1}>
         <Grid.Row>
@@ -63,7 +60,7 @@ class NewFolderForm extends Component {
                 type="text"
                 id="name"
                 onChange={event => this.handleNameChange(event)}
-                value={this.state.name}
+                value={name}
                 placeholder="Folder Name"
               />
               <Label pointing="left">Name</Label>
@@ -75,7 +72,7 @@ class NewFolderForm extends Component {
                 id="image"
                 onChange={event => this.handleUrlChange(event)}
                 placeholder="Add image url"
-                value={this.state.image_url}
+                value={image_url}
               />
               <Label pointing="left">Image Url</Label>
             </Form.Field>
@@ -84,14 +81,14 @@ class NewFolderForm extends Component {
             </Button>
           </Form>
         </Grid.Row>
-        {this.state.error !== "" ? (
+        {error !== "" ? (
           <Message onDismiss={this.resetErrors} negative>
-            {this.state.error}
+            {error}
           </Message>
         ) : null}
-        {this.state.message !== "" ? (
+        {message !== "" ? (
           <Message onDismiss={this.resetErrors} positive>
-            {this.state.message}
+            {message}
           </Message>
         ) : null}
       </Grid>
