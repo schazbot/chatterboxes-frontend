@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "chatterboxes-ff906"
+    "default": "chatterboxes-ff906",
+    "chatbox-frontend": "chatterboxes-ff906"
   }
 }
