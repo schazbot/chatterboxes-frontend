@@ -36,11 +36,11 @@ export default class App extends Component {
 
   render() {
     const { mySentence, selectedFolder, allMyFolders } = this.state
+    const { resetSelectedFolder, removeFromSentence, clearSentence, addToSentence, getMyPics, addPicToFolder, updateFolders, deletePicture, updatePicture, deleteFolder, updateFolder, setFolder } = this
 
     return (
       <>
-        <MenuBar resetSelectedFolder={this.resetSelectedFolder}
-          selectedFolder={selectedFolder} />
+        <MenuBar {...{ selectedFolder, resetSelectedFolder }} />
         <Route
           exact
           path="/"
@@ -48,10 +48,8 @@ export default class App extends Component {
             return (
               <Grid className="folder-container" container centered>
                 <Grid.Row>
-                  <Sentence
-                    mySentence={mySentence}
-                    handleClick={this.removeFromSentence}
-                    clearSentence={this.clearSentence}
+                  <Sentence {...{ mySentence, clearSentence }}
+                    handleClick={removeFromSentence}
                   />
                 </Grid.Row>
                 {selectedFolder ? (
@@ -59,9 +57,8 @@ export default class App extends Component {
                     <Grid.Row>
                       <FolderContents
                         folder={selectedFolder}
-                        handleClick={this.addToSentence}
-                        mySentence={mySentence}
-                        resetSelectedFolder={this.resetSelectedFolder}
+                        handleClick={addToSentence}
+                        {...{ mySentence, resetSelectedFolder }}
                       />
                     </Grid.Row>
                   </>
@@ -92,10 +89,7 @@ export default class App extends Component {
           render={() => (
             <>
               <CreateContainer
-                getMyPics={this.getMyPics}
-                allMyFolders={allMyFolders}
-                addPicToFolder={this.addPicToFolder}
-                updateFolders={this.updateFolders}
+                {...{ getMyPics, allMyFolders, addPicToFolder, updateFolders }}
               />
             </>
           )}
@@ -111,12 +105,7 @@ export default class App extends Component {
                     <>
                       <FolderContentsEdit
                         folder={selectedFolder}
-                        resetSelectedFolder={this.resetSelectedFolder}
-                        deletePicture={this.deletePicture}
-                        updatePicture={this.updatePicture}
-                        selectedFolder={selectedFolder}
-                        deleteFolder={this.deleteFolder}
-                        updateFolder={this.updateFolder}
+                        {...{ resetSelectedFolder, deletePicture, updatePicture, selectedFolder, deleteFolder, updateFolder }}
                       />
                     </>
                   ) : (
@@ -132,7 +121,7 @@ export default class App extends Component {
                                 <FolderCard
                                   key={folder.id}
                                   folder={folder}
-                                  handleClick={this.setFolder}
+                                  handleClick={setFolder}
                                 />
                               </Grid.Column>
                             ))}
@@ -150,13 +139,13 @@ export default class App extends Component {
   }
 
   addToSentence = picture => {
-    const { mySentence} = this.state
+    const { mySentence } = this.state
     if (!mySentence.includes(picture))
       this.setState({ mySentence: [...mySentence, picture] });
   };
 
   removeFromSentence = picture => {
-    const { mySentence} = this.state
+    const { mySentence } = this.state
     let filteredPictures = mySentence.filter(
       pic => pic.id !== picture.id
     );
@@ -171,7 +160,7 @@ export default class App extends Component {
   };
 
   addPicToFolder = (newPicture, folder_id) => {
-    const { allMyFolders} = this.state
+    const { allMyFolders } = this.state
 
     const replacementFolder = allMyFolders.find(
       folder => folder.id === folder_id

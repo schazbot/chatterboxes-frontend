@@ -74,31 +74,25 @@ class CreateContainer extends Component {
 
   render() {
     const { folder_id, searchTerm, searchResults } = this.state
-    const {allMyFolders, updateFolders  } = this.props
+    const { allMyFolders, updateFolders } = this.props
+    const { handleFolderSelectionChange, createPicture, handleSearchQuery, handleOnSubmit, handlePictureSelection} = this
     return (
       <Grid className="main-grid" container>
         <Grid.Row columns={2}>
           <Grid.Column>
             <NewFolderForm
-              allMyFolders={allMyFolders}
-              updateFolders={updateFolders}
+              {...{ allMyFolders, updateFolders }}
             />
           </Grid.Column>
 
           <Grid.Column >
             <FolderDropdown
               folderId={folder_id}
-              allMyFolders={allMyFolders}
-              handleFolderSelectionChange={this.handleFolderSelectionChange}
+              {...{ handleFolderSelectionChange, allMyFolders }}
             />
             <Grid.Row>
               <SearchComponent
-                createPicture={this.createPicture}
-                searchTerm={searchTerm}
-                searchResults={searchResults}
-                handleSearchQuery={this.handleSearchQuery}
-                handleOnSubmit={this.handleOnSubmit}
-                handlePictureSelection={this.handlePictureSelection}
+                {...{ createPicture, searchTerm, searchResults, handleSearchQuery, handleOnSubmit, handlePictureSelection }}
               />
             </Grid.Row>
           </Grid.Column>
@@ -110,8 +104,7 @@ class CreateContainer extends Component {
               <APICard
                 picture={picture}
                 key={picture.id}
-                handlePictureSelection={this.handlePictureSelection}
-                handleOnSubmit={this.handleOnSubmit}
+                {...{ handlePictureSelection, handleOnSubmit }}
               />
             </Grid.Column>
           ))}
