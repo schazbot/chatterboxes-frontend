@@ -76,6 +76,7 @@ export default class FolderContentsEdit extends Component {
   render() {
     const { folder, editedPicToFolder, resetSelectedFolder } = this.props
     const { message } = this.state
+    const { handleFormChange, editFolder, resetErrors, setPicture, editPicture, deletePicture, handlePictureFormChange, deleteFolderFromApi} = this
 
     return (
       <Grid container className="folder-contents-container">
@@ -89,10 +90,10 @@ export default class FolderContentsEdit extends Component {
               <Form.Field>
                 <Input
                   size="small"
-                  onChange={this.handleFormChange}
+                  {...{ handleFormChange }}
                   placeholder={folder.name}
                 />
-                <Button onClick={this.editFolder} color={"green"}>
+                <Button onClick={editFolder} color={"green"}>
                   <Icon name="save" />
                   Save
                 </Button>
@@ -100,7 +101,7 @@ export default class FolderContentsEdit extends Component {
             </Form>
           </Grid.Row>
           {message !== "" ? (
-            <Message onDismiss={this.resetErrors} positive>
+            <Message onDismiss={resetErrors} positive>
               {message}
             </Message>
           ) : null}
@@ -124,11 +125,7 @@ export default class FolderContentsEdit extends Component {
                       className="container-cell "
                       key={picture.id}
                       picture={picture}
-                      setPicture={this.setPicture}
-                      editPicture={this.editPicture}
-                      editedPicToFolder={editedPicToFolder}
-                      deletePicture={this.deletePicture}
-                      handlePictureFormChange={this.handlePictureFormChange}
+                      {...{ deletePicture, handlePictureFormChange, editedPicToFolder, editPicture, setPicture }}
                     />
                   </Grid.Column>
                 ))
@@ -146,7 +143,7 @@ export default class FolderContentsEdit extends Component {
             <Icon name="trash" />
             Delete folder
           </Label>
-          <Button onClick={this.deleteFolderFromApi} color={"red"}>
+          <Button onClick={deleteFolderFromApi} color={"red"}>
             <Icon name="trash" />
             Delete
           </Button>
