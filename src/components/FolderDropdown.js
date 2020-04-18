@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Dropdown, Grid, Icon, Label } from "semantic-ui-react";
 
 class FolderDropdown extends Component {
-  
   parsedDropdownOptions = () => {
     return this.props.allMyFolders.map(folder => {
       return {
@@ -17,7 +16,7 @@ class FolderDropdown extends Component {
 
   render() {
     const { parsedDropdownOptions } = this;
-    const { handleFolderSelectionChange} = this.props
+    const { handleFolderSelectionChange } = this.props;
     return (
       <>
         <Grid>
@@ -34,8 +33,6 @@ class FolderDropdown extends Component {
               onChange={handleFolderSelectionChange}
             />
           </Grid.Row>
-
-
         </Grid>
       </>
     );
@@ -43,3 +40,5 @@ class FolderDropdown extends Component {
 }
 
 export default FolderDropdown;
+
+
