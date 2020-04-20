@@ -3,6 +3,8 @@
 ### An Alternative and Augmentative Communication (AAC) tool giving a voice to those that may not have one.
 Make sentences using symbols to enforce language aqcuisition, and press speak to hear your sentence!
 
+<img src="/chatterboxes.png" width="600">
+
 *LIVE SITE ->  https://chatterboxes-ff906.firebaseapp.com/
 
 *VIDEO DEMO -> https://vimeo.com/338432555
